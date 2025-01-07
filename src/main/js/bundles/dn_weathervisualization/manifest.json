@@ -1,0 +1,69 @@
+{
+    "name": "dn_weathervisualization",
+    "version": "1.0.0-SNAPSHOT",
+    "title": "${bundleName}",
+    "description": "${bundleDescription}",
+    "vendor": "con terra GmbH",
+    "keywords": [
+        "weather visualization",
+        "digital twin"
+    ],
+    "dependencies": {
+        "esri": "^4.18.0",
+        "apprt-vue": "^4.18.0",
+        "apprt-vuetify": "^4.18.0",
+        "apprt-binding": "^4.18.0"
+    },
+    "license": {},
+    "productName": "devnet-mapapps-devnet-weathervisualization",
+    "layout-widgets": [
+        {
+            "widgetRole": "weatherVisualizationWidget",
+            "window": {
+                "title": "${ui.windowTitle}",
+                "autofocus": false,
+                "dockTool": "weatherVisualizationToogleTool",
+                "minimizeOnClose": true,
+                "marginBox": {
+                    "w": 400,
+                    "h": 500,
+                    "b": 100,
+                    "l": 20
+                }
+            }
+        }
+    ],
+    "components": [
+        {
+            "name": "WeatherVisualizationWidgetFactory",
+            "instanceFactory": true,
+            "provides": [
+                "dijit.Widget"
+            ],
+            "properties": {
+                "widgetRole": "weatherVisualizationWidget"
+            },
+            "references": [
+            ]
+        },
+        {
+            "name": "WeatherVisualizationToogleTool",
+            "impl": "ct/tools/Tool",
+            "provides": [
+                "ct.tools.Tool"
+            ],
+            "propertiesConstructor": true,
+            "properties": {
+                "id": "weatherVisualizationToogleTool",
+                "title": "${tool.title}",
+                "tooltip": "${tool.tooltip}",
+                "iconClas": "icon-star-o",
+                "toolRole": "toolset",
+                "togglable": true,
+                "rules": {
+                    "noGroup": true
+                }
+            }
+        }
+    ]
+}

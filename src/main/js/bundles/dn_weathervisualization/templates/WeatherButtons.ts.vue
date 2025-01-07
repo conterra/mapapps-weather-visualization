@@ -15,13 +15,36 @@
     limitations under the License.
 
 -->
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Tests</title>
-        <meta http-equiv="REFRESH" content="0; url=../../../resources/jsregistry/root/@conterra/mapapps-mocha-runner/latest/mocha.html?boot=/js/tests/test-init.js&timeout=5000&test=dn_weathervisualization/tests/all"/>
-    </head>
-    <body>
-        Redirecting to test runner.
-    </body>
-</html>
+<template>
+    <v-container>
+        <v-layout
+            row
+            wrap
+            align-center
+        >
+            <v-btn
+                block
+                :aria-label="label"
+            />
+        </v-layout>F
+    </v-container>
+</template>
+
+<script lang="ts">
+    export default {
+        props:{
+            id:{
+                type: String,
+                default: ""
+            },
+            label: {
+                type: String,
+                default: ""
+            },
+            isSelected: {
+                type: Boolean,
+                default: false
+            }
+        }
+    };
+</script>

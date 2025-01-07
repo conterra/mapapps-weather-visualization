@@ -25,7 +25,8 @@
             "search-ui",
             "locator-store",
             "toc",
-            "sample_helloworld"
+            "sample_helloworld",
+            "dn_weathervisualization"
         ]
     },
     "bundles": {
@@ -79,7 +80,7 @@
         },
         "toc": {
             "Config": {
-                "showBasemaps" : true,
+                "showBasemaps": true,
                 "showLayerLegend": true
             }
         },
@@ -94,7 +95,8 @@
                             "zoomOutTool",
                             "compassTool",
                             "restoreInitialViewTool",
-                            "viewmodeSwitcherTool"
+                            "viewmodeSwitcherTool",
+                            "weatherVisualizationToogleTool"
                         ],
                         "registerWidget": {
                             "widgetRole": "mapview_tools"

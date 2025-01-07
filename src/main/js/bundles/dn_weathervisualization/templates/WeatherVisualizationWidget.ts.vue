@@ -15,13 +15,21 @@
     limitations under the License.
 
 -->
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Tests</title>
-        <meta http-equiv="REFRESH" content="0; url=../../../resources/jsregistry/root/@conterra/mapapps-mocha-runner/latest/mocha.html?boot=/js/tests/test-init.js&timeout=5000&test=dn_weathervisualization/tests/all"/>
-    </head>
-    <body>
-        Redirecting to test runner.
-    </body>
-</html>
+<template>
+    <div class="weather-visualization-widget">
+        <h1>{{ title }}</h1>
+        <p>{{ description }}</p>
+    </div>
+</template>
+
+<script>
+    export default {
+        name: 'weather-visualization-widget',
+        data() {
+            return {
+                title: 'Weather Visualization',
+                description: 'This widget visualizes weather data.'
+            };
+        }
+    };
+</script>
