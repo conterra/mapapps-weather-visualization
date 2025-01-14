@@ -17,13 +17,32 @@
 import Vue from "apprt-vue/Vue";
 import VueDijit from "apprt-vue/VueDijit";
 import WeatherVisualizationWidget from "./templates/WeatherVisualizationWidget.ts.vue";
-import Binding from "apprt-binding/Binding";
+import Weather from "esri/widgets/Weather";
+import Expand from "esri/widgets/Expand";
+import Daylight from "esri/widgets/Daylight";
 
 export class WeatherVisualizationWidgetFactory {
     private binding = undefined;
     private vm = undefined;
-
     _initComponent() {
+
+        this.getView().then((view: __esri.MapView | __esri.SceneView) => {
+            view.view
+            const weatherExpand = new Expand({
+                view: view,
+                content: new Weather({
+                    view: view
+                }),
+
+            });
+            const daylightExpand = new Expand({
+                view: view,
+                content: new Daylight({
+                    view: view
+                })
+            });
+            view.ui.add([weatherExpand, daylightExpand], "bottom-left");
+        });
 
         this.vm = new Vue(WeatherVisualizationWidget);
     }
@@ -34,6 +53,19 @@ export class WeatherVisualizationWidgetFactory {
 
     activate() {
         this._initComponent();
+    }
+    private getView(): Promise< __esri.MapView | __esri.SceneView> {
+        const mapWidgetModel = this._mapWidgetModel;
+        return new Promise((resolve) => {
+            if (mapWidgetModel.view) {
+                resolve(mapWidgetModel.view);
+            } else {
+                const watcher = mapWidgetModel.watch("view", ({ value: view }) => {
+                    watcher.remove();
+                    resolve(view);
+                });
+            }
+        });
     }
 
 }

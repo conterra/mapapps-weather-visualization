@@ -19,17 +19,37 @@
     <div class="weather-visualization-widget">
         <h1>{{ title }}</h1>
         <p>{{ description }}</p>
+        <v-container>
+            <v-layout row>
+                <v-flex
+                    v-for="(weatherType, index) in weatherTypes"
+                    :key="index"
+                    md4
+                    class="weather-type"
+                >
+                    {{ weatherType }}
+                </v-flex>
+            </v-layout>
+        </v-container>
     </div>
 </template>
 
-<script>
+<script lang="ts">
     export default {
         name: 'weather-visualization-widget',
-        data() {
-            return {
-                title: 'Weather Visualization',
-                description: 'This widget visualizes weather data.'
-            };
+        props: {
+            title: {
+                type: String,
+                default: "Weather Visualization"
+            },
+            description: {
+                type: String,
+                default: "Description"
+            },
+            weatherTypes: {
+                type: Array,
+                default: (): string[] => ["A", "B"]
+            }
         }
     };
 </script>

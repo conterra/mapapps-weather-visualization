@@ -44,6 +44,10 @@
                 "widgetRole": "weatherVisualizationWidget"
             },
             "references": [
+                {
+                    "name": "_mapWidgetModel",
+                    "providing": "map-widget.MapWidgetModel"
+                }
             ]
         },
         {

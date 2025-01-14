@@ -43,30 +43,41 @@
             "Config": {
                 "basemaps": [
                     {
-                        "id": "esri_street",
-                        "title": "Straßenkarte (grau)",
-                        "thumbnailUrl": "resource('${app}:/images/streets.png')",
-                        "selected": true,
-                        "basemap": "gray-vector"
+                        "id": "satellite",
+                        "basemap": "satellite",
+                        "title": "Satellit",
+                        "thumbnailUrl": "resource('${app}:/images/hybrid.png')",
+                        "ground": "world-elevation"
                     },
                     {
                         "id": "esri_hybrid",
                         "title": "Luftbild (hybrid)",
                         "thumbnailUrl": "resource('${app}:/images/hybrid.png')",
-                        "basemap": "hybrid"
+                        "basemap": "hybrid",
+                        "ground": "world-elevation"
+                    },
+                    {
+                        "id": "esri_topo",
+                        "title": "Test 3D Karte",
+                        "basemap": "topo-3d",
+                        "ground": "world-elevation"
                     }
                 ],
                 "map": {
-                    "layers": []
+                    "layers": [],
+                    "ground": "world-elevation"
                 },
                 "view": {
-                    "viewmode": "2D",
+                    "viewmode": "3D",
                     "center": {
                         "x": 774853,
                         "y": 6610677,
                         "spatialReference": 3857
                     },
-                    "scale": 140000
+                    "camera": {
+                        "tilt": 80
+                    },
+                    "scale": 12500
                 }
             }
         },
