@@ -17,19 +17,25 @@
 -->
 <template>
     <div class="weather-visualization-widget">
-        <h1>{{ title }}</h1>
-        <p>{{ description }}</p>
         <v-container>
             <v-layout row>
-                <v-flex
-                    v-for="(weatherType, index) in weatherTypes"
-                    :key="index"
-                    md4
-                    class="weather-type"
+                <v-container
+                    v-for="weatherType in weatherTypes"
+                    :key="weatherType"
+                    @click="handleWeatherChange()"
                 >
-                    {{ weatherType }}
-                </v-flex>
+                    <v-flex>
+                        {{ weatherType }}
+                    </v-flex>
+                </v-container>
             </v-layout>
+            <v-slider
+                v-model="precipitation"
+                :max="1"
+                :min="0"
+                :step="0.1"
+                thumb-label
+            />
         </v-container>
     </div>
 </template>
@@ -38,17 +44,19 @@
     export default {
         name: 'weather-visualization-widget',
         props: {
-            title: {
-                type: String,
-                default: "Weather Visualization"
-            },
-            description: {
-                type: String,
-                default: "Description"
-            },
             weatherTypes: {
                 type: Array,
-                default: (): string[] => ["A", "B"]
+                default: (): string[] => ["sunny", "cloudy", "rainy", "snowy", "foggy"]
+            },
+            precipitation: {
+                type: Number,
+                default: 0.5
+
+            }
+        },
+        methods: {
+            handleWeatherChange() {
+                this.$emit('weather-change', this.weatherType);
             }
         }
     };

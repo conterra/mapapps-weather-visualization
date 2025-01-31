@@ -17,34 +17,48 @@
 import Vue from "apprt-vue/Vue";
 import VueDijit from "apprt-vue/VueDijit";
 import WeatherVisualizationWidget from "./templates/WeatherVisualizationWidget.ts.vue";
+import WeatherViewModel from "esri/widgets/Weather/WeatherViewModel";
+import Binding from "apprt-binding/Binding";
 import Weather from "esri/widgets/Weather";
-import Expand from "esri/widgets/Expand";
-import Daylight from "esri/widgets/Daylight";
 
 export class WeatherVisualizationWidgetFactory {
     private binding = undefined;
     private vm = undefined;
+    private weatherViewModel = undefined;
+    private weather: Weather|undefined= undefined;
+
     _initComponent() {
+        const properties = this._properties;
 
         this.getView().then((view: __esri.MapView | __esri.SceneView) => {
-            view.view
-            const weatherExpand = new Expand({
-                view: view,
-                content: new Weather({
-                    view: view
-                }),
+            this.weatherViewModel = new WeatherViewModel({
+                view: view
+            });
 
+
+            const vm = this.vm = new Vue(WeatherVisualizationWidget);
+
+            vm.$on("weather-change", (evt:any) => {
+                this.handleWeatherChange(evt.weatherType);
             });
-            const daylightExpand = new Expand({
+
+            const weatherWidget = new Weather({
                 view: view,
-                content: new Daylight({
-                    view: view
-                })
+                viewModel: this.weatherViewModel
             });
-            view.ui.add([weatherExpand, daylightExpand], "bottom-left");
+            view.environment.weather = {
+                type: "sunny",
+                cloudCover: 0.7,
+                precipitation: 0.5
+            };
+            //this.weatherViewModel.setWeatherByType("rainy");
+            //weatherWidget.renderNow();
         });
 
         this.vm = new Vue(WeatherVisualizationWidget);
+
+
+
     }
     createInstance(): any {
         const vm = this.vm ;
@@ -53,6 +67,9 @@ export class WeatherVisualizationWidgetFactory {
 
     activate() {
         this._initComponent();
+    }
+    deactivate(){
+
     }
     private getView(): Promise< __esri.MapView | __esri.SceneView> {
         const mapWidgetModel = this._mapWidgetModel;
@@ -67,5 +84,10 @@ export class WeatherVisualizationWidgetFactory {
             }
         });
     }
-
+    handleWeatherChange(weatherType: string) {
+        if (this.weatherViewModel) {
+            this.weatherViewModel.setWeatherByType(weatherType);
+        }
+    }
 }
+

@@ -61,7 +61,7 @@
                 "id": "weatherVisualizationToogleTool",
                 "title": "${tool.title}",
                 "tooltip": "${tool.tooltip}",
-                "iconClas": "icon-star-o",
+                "iconClass": "icon-star-o",
                 "toolRole": "toolset",
                 "togglable": true,
                 "rules": {
