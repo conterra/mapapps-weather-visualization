@@ -35,17 +35,11 @@ export class WeatherVisualizationWidgetFactory {
                 view: view
             });
 
-            const weatherWidget = new Weather({
-                view: view,
-                viewModel: this.weatherViewModel
-            });
             view.environment.weather = {
-                type: "sunny",
-                cloudCover: 0.7,
-                precipitation: 0.5
+                type: "rainy",
+                cloudCover: 0.1,
+                precipitation: 0.1
             };
-            //this.weatherViewModel.setWeatherByType("rainy");
-            //weatherWidget.renderNow();
         });
         const vm = this.vm = new Vue(WeatherVisualizationWidget);
 
@@ -53,9 +47,13 @@ export class WeatherVisualizationWidgetFactory {
             this.handleWeatherChange(evt);
         });
 
+        vm.$on("cloud-cover-change", (evt:any) => {
+            this.handleCloudCoverChange(evt.activeWeather, evt.cloudCover);
+        });
 
 
     }
+
     createInstance(): any {
         const vm = this.vm ;
         return VueDijit(this.vm, { class: "weather-visualization-widget" });
@@ -83,6 +81,15 @@ export class WeatherVisualizationWidgetFactory {
     handleWeatherChange(weatherType: string) {
         if (this.weatherViewModel) {
             this.weatherViewModel.setWeatherByType(weatherType);
+            console.log(this.weatherViewModel[weatherType]);
+        }
+    }
+    handleCloudCoverChange(activeWeather: string, cloudCover: number):void {
+        if(this.weatherViewModel){
+            const weatherType = this.weatherViewModel.weatherByType[activeWeather];
+            if (weatherType) {
+                weatherType.cloudCover = cloudCover;
+            }
         }
     }
 }

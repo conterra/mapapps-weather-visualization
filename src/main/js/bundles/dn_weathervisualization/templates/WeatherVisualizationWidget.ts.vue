@@ -28,11 +28,12 @@
                 />
             </v-layout>
             <v-slider
-                v-model="precipitation"
+                v-model="cloudCover"
                 :max="1"
                 :min="0"
                 :step="0.1"
                 thumb-label
+                @end="handleCloudCoverChange"
             />
         </v-container>
     </div>
@@ -51,7 +52,7 @@
                 type: Array as () => string[],
                 default: (): string[] => ["sunny", "cloudy", "rainy", "snowy", "foggy"]
             },
-            precipitation: {
+            cloudCover: {
                 type: Number,
                 default: 0.5
             },
@@ -63,7 +64,13 @@
             handleWeatherChange(weatherType: string) {
                 this.activeWeather = weatherType;
                 this.$emit('weather-change', this.activeWeather);
-                console.log("Weather changed to: " + this.activeWeather);
+            },
+            handleCloudCoverChange() {
+                const changedWeather = {
+                    activeWeather: this.activeWeather,
+                    cloudCover: this.cloudCover
+                };
+                this.$emit('cloud-cover-change', changedWeather);
             }
         }
     };
