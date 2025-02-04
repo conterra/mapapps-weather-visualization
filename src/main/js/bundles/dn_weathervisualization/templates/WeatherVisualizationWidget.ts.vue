@@ -19,15 +19,13 @@
     <div class="weather-visualization-widget">
         <v-container>
             <v-layout row>
-                <v-container
+                <weather-type
                     v-for="weatherType in weatherTypes"
                     :key="weatherType"
-                    @click="handleWeatherChange()"
-                >
-                    <v-flex>
-                        {{ weatherType }}
-                    </v-flex>
-                </v-container>
+                    :weather-type="weatherType"
+                    :is-selected="weatherType === activeWeather"
+                    @weather-change="handleWeatherChange"
+                />
             </v-layout>
             <v-slider
                 v-model="precipitation"
@@ -41,22 +39,31 @@
 </template>
 
 <script lang="ts">
+    import WeatherType from './WeatherType.ts.vue';
+
     export default {
         name: 'weather-visualization-widget',
+        components: {
+            weatherType: WeatherType
+        },
         props: {
             weatherTypes: {
-                type: Array,
+                type: Array as () => string[],
                 default: (): string[] => ["sunny", "cloudy", "rainy", "snowy", "foggy"]
             },
             precipitation: {
                 type: Number,
                 default: 0.5
-
-            }
+            },
+            activeWeather:{
+                type: String,
+                default: "rainy"}
         },
         methods: {
-            handleWeatherChange() {
-                this.$emit('weather-change', this.weatherType);
+            handleWeatherChange(weatherType: string) {
+                this.activeWeather = weatherType;
+                this.$emit('weather-change', this.activeWeather);
+                console.log("Weather changed to: " + this.activeWeather);
             }
         }
     };

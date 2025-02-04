@@ -35,13 +35,6 @@ export class WeatherVisualizationWidgetFactory {
                 view: view
             });
 
-
-            const vm = this.vm = new Vue(WeatherVisualizationWidget);
-
-            vm.$on("weather-change", (evt:any) => {
-                this.handleWeatherChange(evt.weatherType);
-            });
-
             const weatherWidget = new Weather({
                 view: view,
                 viewModel: this.weatherViewModel
@@ -54,8 +47,11 @@ export class WeatherVisualizationWidgetFactory {
             //this.weatherViewModel.setWeatherByType("rainy");
             //weatherWidget.renderNow();
         });
+        const vm = this.vm = new Vue(WeatherVisualizationWidget);
 
-        this.vm = new Vue(WeatherVisualizationWidget);
+        vm.$on("weather-change", (evt:any) => {
+            this.handleWeatherChange(evt);
+        });
 
 
 
