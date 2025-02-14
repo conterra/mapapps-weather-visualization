@@ -20,40 +20,56 @@ import WeatherVisualizationWidget from "./templates/WeatherVisualizationWidget.t
 import WeatherViewModel from "esri/widgets/Weather/WeatherViewModel";
 import Binding from "apprt-binding/Binding";
 import Weather from "esri/widgets/Weather";
+import { debounceOrCancel, ifDefined } from "apprt-binding/Transformers";
 
 export class WeatherVisualizationWidgetFactory {
     private binding = undefined;
     private vm = undefined;
     private weatherViewModel = undefined;
-    private weather: Weather|undefined= undefined;
 
     _initComponent() {
         const properties = this._properties;
-
+        const vm = this.vm = new Vue(WeatherVisualizationWidget);
         this.getView().then((view: __esri.MapView | __esri.SceneView) => {
             this.weatherViewModel = new WeatherViewModel({
                 view: view
             });
 
             view.environment.weather = {
-                type: "rainy",
-                cloudCover: 0.1,
-                precipitation: 0.1
+                type: "sunny",
+                cloudCover: 0.1
             };
+
+            this.binding = this.createBinding(vm);
         });
-        const vm = this.vm = new Vue(WeatherVisualizationWidget);
 
         vm.$on("weather-change", (evt:any) => {
             this.handleWeatherChange(evt);
         });
-
-        vm.$on("cloud-cover-change", (evt:any) => {
-            this.handleCloudCoverChange(evt.activeWeather, evt.cloudCover);
+        vm.$on("slider-change", (evt:any) => {
+            if(evt.cloudCover >= 0){
+                this.handleCloudCoverChange(evt.activeWeather, evt.cloudCover);
+            }
+            if(evt.precipitation >= 0){
+                this.handlePrecipitationChange(evt.activeWeather, evt.precipitation);
+            }
+            if(evt.fogStrength >= 0){
+                this.handlefogStrengthChange(evt.activeWeather, evt.fogStrength);
+            }
         });
-
 
     }
 
+    createBinding(vm: any) {
+        const model = this.weatherViewModel;
+
+        return Binding.for(model, vm)
+            .sync("weatherByType", ["sunny"], ifDefined(({ sunny }) => sunny),
+                (values) =>{console.info(values); return values;}
+            )
+            .enable()
+            .syncToRightNow();
+    }
     createInstance(): any {
         const vm = this.vm ;
         return VueDijit(this.vm, { class: "weather-visualization-widget" });
@@ -78,18 +94,38 @@ export class WeatherVisualizationWidgetFactory {
             }
         });
     }
-    handleWeatherChange(weatherType: string) {
+    handleWeatherChange(weatherType: string): void {
         if (this.weatherViewModel) {
             this.weatherViewModel.setWeatherByType(weatherType);
-            console.log(this.weatherViewModel[weatherType]);
+           // console.log(this.weatherViewModel.current.type);
         }
     }
     handleCloudCoverChange(activeWeather: string, cloudCover: number):void {
+        // if(this.weatherViewModel){
+        //     const weatherType = this.weatherViewModel.weatherByType[activeWeather];
+        //     if (weatherType) {
+        //         weatherType.cloudCover = cloudCover;
+        //     }
+        // }
         if(this.weatherViewModel){
-            const weatherType = this.weatherViewModel.weatherByType[activeWeather];
+            const weatherType = this.weatherViewModel.current;
             if (weatherType) {
                 weatherType.cloudCover = cloudCover;
             }
+        }
+    }
+    handlePrecipitationChange(activeWeather: string, precipitation: number):void {
+        if(this.weatherViewModel){
+            const weatherType = this.weatherViewModel.current;
+            if (weatherType) {
+                weatherType.precipitation = precipitation;
+            }
+        }
+    }
+    handlefogStrengthChange(activeWeather: string, fogStrength: number):void {
+        if(this.weatherViewModel && activeWeather === "foggy"){
+            const weatherType = this.weatherViewModel.current;
+            weatherType.fogStrength= fogStrength;
         }
     }
 }
