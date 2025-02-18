@@ -48,16 +48,18 @@ export class WeatherVisualizationWidgetFactory {
         });
         vm.$on("slider-change", (evt:any) => {
             if(evt.cloudCover >= 0){
-                this.handleCloudCoverChange(evt.activeWeather, evt.cloudCover);
+                this.handleCloudCoverChange(evt.cloudCover);
             }
-            if(evt.precipitation >= 0){
-                this.handlePrecipitationChange(evt.activeWeather, evt.precipitation);
+            else if(evt.precipitation >= 0){
+                this.handlePrecipitationChange(evt.precipitation);
             }
-            if(evt.fogStrength >= 0){
-                this.handlefogStrengthChange(evt.activeWeather, evt.fogStrength);
+            else if(evt.fogStrength >= 0){
+                this.handlefogStrengthChange(evt.fogStrength);
             }
         });
-
+        vm.$on("snow-cover-change", (evt:any) => {
+            this.handleSnowCoverChange(evt.snowCover);
+        });
     }
 
     createBinding(vm: any) {
@@ -97,16 +99,9 @@ export class WeatherVisualizationWidgetFactory {
     handleWeatherChange(weatherType: string): void {
         if (this.weatherViewModel) {
             this.weatherViewModel.setWeatherByType(weatherType);
-           // console.log(this.weatherViewModel.current.type);
         }
     }
-    handleCloudCoverChange(activeWeather: string, cloudCover: number):void {
-        // if(this.weatherViewModel){
-        //     const weatherType = this.weatherViewModel.weatherByType[activeWeather];
-        //     if (weatherType) {
-        //         weatherType.cloudCover = cloudCover;
-        //     }
-        // }
+    handleCloudCoverChange(cloudCover: number):void {
         if(this.weatherViewModel){
             const weatherType = this.weatherViewModel.current;
             if (weatherType) {
@@ -114,7 +109,7 @@ export class WeatherVisualizationWidgetFactory {
             }
         }
     }
-    handlePrecipitationChange(activeWeather: string, precipitation: number):void {
+    handlePrecipitationChange(precipitation: number):void {
         if(this.weatherViewModel){
             const weatherType = this.weatherViewModel.current;
             if (weatherType) {
@@ -122,10 +117,21 @@ export class WeatherVisualizationWidgetFactory {
             }
         }
     }
-    handlefogStrengthChange(activeWeather: string, fogStrength: number):void {
-        if(this.weatherViewModel && activeWeather === "foggy"){
+    handlefogStrengthChange(fogStrength: number):void {
+        if(this.weatherViewModel){
             const weatherType = this.weatherViewModel.current;
             weatherType.fogStrength= fogStrength;
+        }
+    }
+    handleSnowCoverChange(snowCover: boolean):void {
+        if(this.weatherViewModel){
+            const weatherType = this.weatherViewModel.current;
+            if(snowCover){
+                weatherType.snowCover = "enabled";
+            }else{
+                weatherType.snowCover = "disabled";
+            }
+
         }
     }
 }

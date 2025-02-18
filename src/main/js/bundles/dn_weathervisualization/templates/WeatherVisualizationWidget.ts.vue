@@ -18,50 +18,6 @@
 <template>
     <div class="weather-visualization-widget">
         <v-container>
-            <v-layout row>
-                <weather-type
-                    v-for="weatherType in weatherTypes"
-                    :key="weatherType"
-                    :weather-type="weatherType"
-                    :is-selected="weatherType === activeWeather"
-                    @weather-change="handleWeatherChange"
-                />
-            </v-layout>
-            {{ sunny }}
-            <v-slider
-                v-if="['sunny', 'cloudy', 'rainy', 'snowy'].includes(activeWeather)"
-                v-model="cloudCover"
-                label="cloud cover"
-                :max="1"
-                :min="0"
-                :step="0.1"
-                @end="handleCloudCoverChange"
-            />
-            <v-slider
-                v-if="['rainy', 'snowy'].includes(activeWeather)"
-                v-model="precipitation"
-                label="precipitation"
-                :max="1"
-                :min="0"
-                :step="0.1"
-                @end="handlePrecipitiationChange"
-            />
-            <v-slider
-                v-if="['foggy'].includes(activeWeather)"
-                v-model="fogStrength"
-                label="fog strength"
-                :max="1"
-                :min="0"
-                :step="0.1"
-                @end="handlefogStengthChange"
-            />
-            <v-checkbox
-                v-if="['snowy'].includes(activeWeather)"
-                v-model="snowCover"
-                label="snow cover"
-            />
-        </v-container>
-        <v-container>
             <v-stepper
                 v-model="activeWeather"
                 non-linear
@@ -70,9 +26,15 @@
                     <v-stepper-item
                         v-for="weatherType in weatherTypes"
                         :key="weatherType"
+                        :name="weatherType"
+                        :is-selected="weatherType === activeWeather"
+                        class="weather-type"
                         @click="handleWeatherChange(weatherType)"
                     >
-                        {{ weatherType }}
+                        <div> {{ weatherType }}</div>
+                        <!-- <span class="material-icons">
+                            sunny
+                        </span> -->
                     </v-stepper-item>
                 </v-stepper-header>
 
@@ -88,6 +50,7 @@
                         :max="1"
                         :min="0"
                         :step="0.1"
+                        class="slider"
                         @end="handleCloudCoverChange"
                     />
                     <v-slider
@@ -97,6 +60,7 @@
                         :max="1"
                         :min="0"
                         :step="0.1"
+                        class="slider"
                         @end="handlePrecipitiationChange"
                     />
                     <v-slider
@@ -106,12 +70,15 @@
                         :max="1"
                         :min="0"
                         :step="0.1"
+                        class="slider"
                         @end="handlefogStengthChange"
                     />
                     <v-checkbox
                         v-if="['snowy'].includes(activeWeather)"
                         v-model="snowCover"
                         label="snow cover"
+                        class="snowCheckbox"
+                        @change="handleSnowCoverChange"
                     />
                 </v-stepper-content>
             </v-stepper>
@@ -120,13 +87,8 @@
 </template>
 
 <script lang="ts">
-    import WeatherType from './WeatherType.ts.vue';
-
     export default {
         name: 'weather-visualization-widget',
-        components: {
-            weatherType: WeatherType
-        },
         props: {
             sunny:{
                 type: Object,
@@ -189,6 +151,13 @@
                     fogStrength: this.fogStrength
                 };
                 this.$emit('slider-change', changedWeather);
+            },
+            handleSnowCoverChange() {
+                const changedWeather = {
+                    activeWeather: this.activeWeather,
+                    snowCover: this.snowCover
+                };
+                this.$emit('snow-cover-change', changedWeather);
             }
         }
     };

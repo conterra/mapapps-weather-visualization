@@ -33,6 +33,14 @@
             }
         }
     ],
+    "cssThemesExtension": [
+        {
+            "name": "*",
+            "files": [
+                "./styles/styles.css"
+            ]
+        }
+    ],
     "components": [
         {
             "name": "WeatherVisualizationWidgetFactory",
