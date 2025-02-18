@@ -43,7 +43,29 @@
                     :key="weatherType"
                     :step="weatherType"
                 >
-                    <v-slider
+                    <div v-if="activeWeather === 'sunny'">
+                        <v-slider
+                            v-model="sunnyCloudCover"
+                            label="cloud cover"
+                            :max="1"
+                            :min="0"
+                            :step="0.1"
+                            @input="sunnySettings.cloudCover = sunnyCloudCover"
+                        />
+                    </div>
+                    <div v-if="activeWeather === 'cloudy'">
+                        {{ cloudySettings }}
+                    </div>
+                    <div v-if="activeWeather === 'rainy'">
+                        {{ rainySettings }}
+                    </div>
+                    <div v-if="activeWeather === 'snowy'">
+                        {{ snowySettings }}
+                    </div>
+                    <div v-if="activeWeather === 'foggy'">
+                        {{ foggySettings }}
+                    </div>
+                    <!-- <v-slider
                         v-if="['sunny', 'cloudy', 'rainy', 'snowy'].includes(activeWeather)"
                         v-model="cloudCover"
                         label="cloud cover"
@@ -79,7 +101,7 @@
                         label="snow cover"
                         class="snowCheckbox"
                         @change="handleSnowCoverChange"
-                    />
+                    /> -->
                 </v-stepper-content>
             </v-stepper>
         </v-container>
@@ -90,48 +112,73 @@
     export default {
         name: 'weather-visualization-widget',
         props: {
-            sunny:{
-                type: Object,
-                default: () => {}
-            },
-            cloudyCloudCover:{
-                type: Object,
-                default: () => {}
-            },
-            rainyCloudCover:{
-                type: Object,
-                default: () => {}
+            activeWeather:{
+                type: String,
+                default: ""
             },
             weatherTypes: {
                 type: Array as () => string[],
                 default: (): string[] => ["sunny", "cloudy", "rainy", "snowy", "foggy"]
             },
-            cloudCover: {
-                type: Number,
-                default: 0.5
+            cloudySettings: {
+                type: Object,
+                default: () => {}
             },
-            precipitation: {
-                type: Number,
-                default: 0.5
+            foggySettings: {
+                type: Object,
+                default: () => {}
             },
-            fogStrength: {
-                type: Number,
-                default: 0.1
+            rainySettings: {
+                type: Object,
+                default: () => {}
             },
-            snowCover: {
-                type: Boolean,
-                default: false
+            snowySettings: {
+                type: Object,
+                default: () => {}
             },
-            activeWeather:{
-                type: String,
-                default: "sunny"}
+            sunnySettings: {
+                type: Object,
+                default: () => {}
+            }
         },
+        data() {
+            return {
+                sunnyCloudCover: 0,
+                cloudCover: 0,
+                precipitation: 0,
+                fogStrength: 0,
+                snowCover: false
+            };
+        },
+        // computed: {
+        //     sunnyCloudCover: {
+        //         get() {
+        //             return this.sunnySettings.cloudCover;
+        //         },
+        //         set(value) {
+        //             this.sunnySettings.cloudCover = value;
+        //         }
+        //     }
+        //     //     },
+        //     //     cloudyConfig() {
+        //     //         return this.weatherByType.cloudy;
+        //     //     },
+        //     //     rainyConfig() {
+        //     //         return this.weatherByType.rainy;
+        //     //     },
+        //     //     snowyConfig() {
+        //     //         return this.weatherByType.snowy;
+        //     //     },
+        //     //     foggyConfig() {
+        //     //         return this.weatherByType.foggy;
+        //     //     }
+        // },
         methods: {
             handleWeatherChange(weatherType: string) {
                 this.activeWeather = weatherType;
                 this.$emit('weather-change', this.activeWeather);
             },
-            handleCloudCoverChange() {
+            handleCloudCoverChange(weatherType: string) {
                 const changedWeather = {
                     activeWeather: this.activeWeather,
                     cloudCover: this.cloudCover

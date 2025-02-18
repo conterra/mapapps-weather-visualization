@@ -43,7 +43,7 @@ export class WeatherVisualizationWidgetFactory {
             this.binding = this.createBinding(vm);
         });
 
-        vm.$on("weather-change", (evt:any) => {
+        vm.$on("weather-change", (evt: any) => {
             this.handleWeatherChange(evt);
         });
         vm.$on("slider-change", (evt:any) => {
@@ -65,25 +65,28 @@ export class WeatherVisualizationWidgetFactory {
     createBinding(vm: any) {
         const model = this.weatherViewModel;
 
-        return Binding.for(model, vm)
-            .sync("weatherByType", ["sunny"], ifDefined(({ sunny }) => sunny),
-                (values) =>{console.info(values); return values;}
-            )
+        return Binding.for(model.weatherByType, vm)
+            .sync("cloudy", "cloudySettings")
+            .sync("foggy", "foggySettings")
+            .sync("rainy", "rainySettings")
+            .sync("snowy", "snowySettings")
+            .sync("sunny", "sunnySettings")
             .enable()
             .syncToRightNow();
     }
+
     createInstance(): any {
-        const vm = this.vm ;
+        const vm = this.vm;
         return VueDijit(this.vm, { class: "weather-visualization-widget" });
     }
 
     activate() {
         this._initComponent();
     }
-    deactivate(){
+    deactivate() {
 
     }
-    private getView(): Promise< __esri.MapView | __esri.SceneView> {
+    private getView(): Promise<__esri.MapView | __esri.SceneView> {
         const mapWidgetModel = this._mapWidgetModel;
         return new Promise((resolve) => {
             if (mapWidgetModel.view) {
