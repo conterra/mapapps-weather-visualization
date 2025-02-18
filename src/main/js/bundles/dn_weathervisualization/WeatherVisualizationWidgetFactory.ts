@@ -19,8 +19,6 @@ import VueDijit from "apprt-vue/VueDijit";
 import WeatherVisualizationWidget from "./templates/WeatherVisualizationWidget.ts.vue";
 import WeatherViewModel from "esri/widgets/Weather/WeatherViewModel";
 import Binding from "apprt-binding/Binding";
-import Weather from "esri/widgets/Weather";
-import { debounceOrCancel, ifDefined } from "apprt-binding/Transformers";
 
 export class WeatherVisualizationWidgetFactory {
     private binding = undefined;

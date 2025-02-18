@@ -44,6 +44,7 @@
                     :step="weatherType"
                 >
                     <div v-if="activeWeather === 'sunny'">
+                        {{ sunnySettings }}
                         <v-slider
                             v-model="sunnyCloudCover"
                             label="cloud cover"
@@ -55,9 +56,34 @@
                     </div>
                     <div v-if="activeWeather === 'cloudy'">
                         {{ cloudySettings }}
+                        <v-slider
+                            v-model="cloudyCloudCover"
+                            label="cloud cover"
+                            :max="1"
+                            :min="0"
+                            :step="0.1"
+                            @input="cloudySettings.cloudCover = cloudyCloudCover"
+                        />
                     </div>
+
                     <div v-if="activeWeather === 'rainy'">
                         {{ rainySettings }}
+                        <v-slider
+                            v-model="rainyCloudCover"
+                            label="cloud cover"
+                            :max="1"
+                            :min="0"
+                            :step="0.1"
+                            @input="rainySettings.cloudCover = rainyCloudCover"
+                        />
+                        <v-slider
+                            v-model="rainyPrecipitation"
+                            label="precipitation"
+                            :max="1"
+                            :min="0"
+                            :step="0.1"
+                            @input="rainySettings.precipitation = rainyPrecipitation"
+                        />
                     </div>
                     <div v-if="activeWeather === 'snowy'">
                         {{ snowySettings }}
@@ -72,7 +98,6 @@
                         :max="1"
                         :min="0"
                         :step="0.1"
-                        class="slider"
                         @end="handleCloudCoverChange"
                     />
                     <v-slider
@@ -82,7 +107,6 @@
                         :max="1"
                         :min="0"
                         :step="0.1"
-                        class="slider"
                         @end="handlePrecipitiationChange"
                     />
                     <v-slider
@@ -92,15 +116,12 @@
                         :max="1"
                         :min="0"
                         :step="0.1"
-                        class="slider"
                         @end="handlefogStengthChange"
                     />
                     <v-checkbox
                         v-if="['snowy'].includes(activeWeather)"
                         v-model="snowCover"
                         label="snow cover"
-                        class="snowCheckbox"
-                        @change="handleSnowCoverChange"
                     /> -->
                 </v-stepper-content>
             </v-stepper>
@@ -144,8 +165,11 @@
         data() {
             return {
                 sunnyCloudCover: 0,
-                cloudCover: 0,
-                precipitation: 0,
+                cloudyCloudCover: 0,
+                rainyCloudCover: 0,
+                snowyCloudCover: 0,
+                rainyPrecipitation: 0,
+                snowyPrecipitation: 0,
                 fogStrength: 0,
                 snowCover: false
             };
