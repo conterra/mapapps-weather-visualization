@@ -14,6 +14,44 @@
  * limitations under the License.
  */
 .weather-type {
-    color : rgb(251, 8, 8);
     cursor: pointer;
+    padding: 0.5em; /* Dynamische Größe */
+    border: 1px solid #ccc;
+    margin: 0.25em; /* Dynamische Abstände */
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1 1 auto;
+    height: min-content;
+}
+.weather-type.is-selected {
+    background-color: #0078d4;
+    color: rgb(255, 255, 255);
+}
+
+.weather-icon {
+    width: 16px;
+    height: 16px;
+}
+
+.selected-icon {
+    filter: invert(100%);
+}
+
+.unselected-icon {
+    filter: invert(0%);
+}
+
+.weather-stepper {
+    font-size: 0.8em;
+    padding: 0.5em;
+}
+.weather-stepper-header {
+    height: auto; /* Höhe automatisch an den Inhalt anpassen */
+    padding: 0; /* Kein zusätzliches Padding */
+    margin: 0; /* Kein zusätzliches Margin */
+    justify-content: center;
+    text-align: center;
+    display: flex;
 }

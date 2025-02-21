@@ -44,20 +44,7 @@ export class WeatherVisualizationWidgetFactory {
         vm.$on("weather-change", (evt: any) => {
             this.handleWeatherChange(evt);
         });
-        vm.$on("slider-change", (evt:any) => {
-            if(evt.cloudCover >= 0){
-                this.handleCloudCoverChange(evt.cloudCover);
-            }
-            else if(evt.precipitation >= 0){
-                this.handlePrecipitationChange(evt.precipitation);
-            }
-            else if(evt.fogStrength >= 0){
-                this.handlefogStrengthChange(evt.fogStrength);
-            }
-        });
-        vm.$on("snow-cover-change", (evt:any) => {
-            this.handleSnowCoverChange(evt.snowCover);
-        });
+        vm.iconBaseURL = properties.iconBaseURL;
     }
 
     createBinding(vm: any) {
