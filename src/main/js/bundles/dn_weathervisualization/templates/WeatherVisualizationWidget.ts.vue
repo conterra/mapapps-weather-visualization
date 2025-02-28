@@ -61,6 +61,7 @@
                             :max="1"
                             :min="0"
                             :step="0.1"
+                            class="custom-slider"
                             @input="sunnySettings.cloudCover = sunnyCloudCover"
                         />
                     </div>
@@ -71,6 +72,7 @@
                             :max="1"
                             :min="0"
                             :step="0.1"
+                            class="custom-slider"
                             @input="cloudySettings.cloudCover = cloudyCloudCover"
                         />
                     </div>
@@ -82,6 +84,7 @@
                             :max="1"
                             :min="0"
                             :step="0.1"
+                            class="custom-slider"
                             @input="rainySettings.cloudCover = rainyCloudCover"
                         />
                         <v-slider
@@ -90,6 +93,7 @@
                             :max="1"
                             :min="0"
                             :step="0.1"
+                            class="custom-slider"
                             @input="rainySettings.precipitation = rainyPrecipitation"
                         />
                     </div>
@@ -100,6 +104,7 @@
                             :max="1"
                             :min="0"
                             :step="0.1"
+                            class="custom-slider"
                             @input="snowySettings.cloudCover = snowyCloudCover"
                         />
                         <v-slider
@@ -108,6 +113,7 @@
                             :max="1"
                             :min="0"
                             :step="0.1"
+                            class="custom-slider"
                             @input="snowySettings.precipitation = snowyPrecipitation"
                         />
                         <v-checkbox
@@ -123,6 +129,7 @@
                             :max="1"
                             :min="0"
                             :step="0.1"
+                            class="custom-slider"
                             @input="foggySettings.fogStrength = fogStrength"
                         />
                     </div>
@@ -138,7 +145,7 @@
         props: {
             activeWeather:{
                 type: String,
-                default: ""
+                default: "sunny"
             },
             weatherTypes: {
                 type: Array as () => string[],

@@ -25,10 +25,10 @@
                 "dockTool": "weatherVisualizationToogleTool",
                 "minimizeOnClose": true,
                 "marginBox": {
-                    "w": 400,
-                    "h": 400,
-                    "b": 100,
-                    "l": 20
+                    "w": "auto",
+                    "h": "auto",
+                    "t": 150,
+                    "l": 10
                 }
             }
         }

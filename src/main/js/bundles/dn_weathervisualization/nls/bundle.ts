@@ -16,11 +16,11 @@
 
 const i18n = {
     root: ({
-        bundleName: "waether visualization",
+        bundleName: "weather visualization",
         bundleDescription: "",
         tool: {
             title: "Weather visualization",
-            tooltip: "Weather visualization"
+            tooltip: "weather visualization"
         },
         ui: {
             windowTitle: "Weather visualization"

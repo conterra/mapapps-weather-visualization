@@ -17,7 +17,7 @@
     cursor: pointer;
     padding: 0.5em; /* Dynamische Größe */
     border: 1px solid #ccc;
-    margin: 0.25em; /* Dynamische Abstände */
+    margin: 0.5px 0.5px 1px 0.5px !important;
     border-radius: 5px;
     display: flex;
     justify-content: center;
@@ -48,10 +48,35 @@
     padding: 0.5em;
 }
 .weather-stepper-header {
-    height: auto; /* Höhe automatisch an den Inhalt anpassen */
-    padding: 0; /* Kein zusätzliches Padding */
-    margin: 0; /* Kein zusätzliches Margin */
+    height: auto !important;
+    padding: 0;
+    margin: 0;
     justify-content: center;
     text-align: center;
     display: flex;
+}
+
+.container{
+    padding:0 !important;
+}
+
+.v-stepper__content {
+    padding: 4px 4px 2px 4px !important;
+    border-bottom: 1px !important;
+}
+.v-messages.theme--light{
+    display: none;
+}
+
+.v-label.theme--light{
+    font-size: 12px !important;
+}
+
+.custom-slider .v-slider__thumb.primary {
+    width: 16px !important;
+    height: 16px !important;
+}
+
+.dijitDialogPaneContent{
+    height: auto !important;
 }

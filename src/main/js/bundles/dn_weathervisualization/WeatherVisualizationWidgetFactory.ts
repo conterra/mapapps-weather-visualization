@@ -33,11 +33,6 @@ export class WeatherVisualizationWidgetFactory {
                 view: view
             });
 
-            view.environment.weather = {
-                type: "sunny",
-                cloudCover: 0.1
-            };
-
             this.binding = this.createBinding(vm);
         });
 
