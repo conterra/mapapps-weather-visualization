@@ -42,7 +42,7 @@
                                 class="weather-icon"
                                 alt=""
                             >
-                            <div>
+                            <div class="weather-type-label">
                                 {{ weatherType }}
                             </div>
                         </div>
@@ -119,6 +119,7 @@
                         <v-checkbox
                             v-model="snowCover"
                             label="snow cover"
+                            class="custom-checkbox"
                             @change="snowySettings.snowCover = snowCover ? 'enabled' : 'disabled'"
                         />
                     </div>

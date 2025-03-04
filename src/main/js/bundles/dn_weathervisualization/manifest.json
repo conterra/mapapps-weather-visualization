@@ -24,6 +24,7 @@
                 "autofocus": false,
                 "dockTool": "weatherVisualizationToogleTool",
                 "minimizeOnClose": true,
+                "resizable": false,
                 "marginBox": {
                     "w": "auto",
                     "h": "auto",

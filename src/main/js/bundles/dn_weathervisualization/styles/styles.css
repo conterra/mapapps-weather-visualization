@@ -13,28 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+ .weatherVisualizationWidget .dijitDialog{
+    height: fit-content !important;
+}
 .weather-type {
     cursor: pointer;
-    padding: 0.5em; /* Dynamische Größe */
-    border: 1px solid #ccc;
-    margin: 0.5px 0.5px 1px 0.5px !important;
-    border-radius: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex: 1 1 auto;
+    padding: 0.5em;
+    /* Dynamische Größe */
+    border: 1px solid #afafaf;
+    margin: 0.5px 2px 0 2px !important;
+    flex: auto;
     height: min-content;
 }
+
 .weather-type.is-selected {
-    background-color: #0078d4;
-    color: rgb(255, 255, 255);
+    background-color: #007ac2;
+    color: #fff;
 }
 
 .weather-icon {
     width: 16px;
     height: 16px;
+    margin-top: 2px !important;
+    margin-bottom: -2px !important;
 }
 
+.weather-type-label{
+    margin-bottom: 2px !important;
+    font-size: small;
+}
 .selected-icon {
     filter: invert(100%);
 }
@@ -44,39 +51,52 @@
 }
 
 .weather-stepper {
-    font-size: 0.8em;
-    padding: 0.5em;
-}
-.weather-stepper-header {
-    height: auto !important;
-    padding: 0;
-    margin: 0;
-    justify-content: center;
-    text-align: center;
-    display: flex;
+    box-shadow: 0 0 0 0 !important;
 }
 
-.container{
-    padding:0 !important;
+.weather-stepper-header {
+    height: auto !important;
+    text-align: center;
+    box-shadow: 0 0 0 0 !important;
+}
+
+.container {
+    padding: 0 !important;
 }
 
 .v-stepper__content {
-    padding: 4px 4px 2px 4px !important;
-    border-bottom: 1px !important;
+    padding: 0 4px 0 4px!important;
 }
-.v-messages.theme--light{
+
+/* Element zwischen Slidern entfernt */
+.v-messages.theme--light {
     display: none;
 }
 
-.v-label.theme--light{
-    font-size: 12px !important;
+/* Schriftgröße des Label von Slider und Checkbox  */
+.v-label.theme--light {
+    font-size: 14px !important;
 }
 
+/* Slidernbuttongröße */
 .custom-slider .v-slider__thumb.primary {
-    width: 16px !important;
-    height: 16px !important;
+    width: 14px !important;
+    height: 14px !important;
 }
 
-.dijitDialogPaneContent{
+/* Margin unterhalb des Sliders auf Null gesetzt */
+.v-input__slot{
+    margin-bottom: 0 !important;
+}
+/* Margin überhalb der Checkbox bei snowy */
+.custom-checkbox{
+    margin-top: 6px !important;
+}
+/* Checkbox bei snowy in der einheitlichen Farbe */
+.accent--text .custom-checkbox {
+    color: #0078d4 !important;
+}
+
+.dijitDialogPaneContent {
     height: auto !important;
 }
