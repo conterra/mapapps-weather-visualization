@@ -13,14 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- .weatherVisualizationWidget .dijitDialog{
+ .dijitDialog{
     height: fit-content !important;
+    width: 300px !important;
+}
+.dijitDialogPaneContent {
+    height: auto !important;
 }
 .weather-type {
     cursor: pointer;
     padding: 0.5em;
-    /* Dynamische Größe */
     border: 1px solid #afafaf;
+    border-radius: 5px;
     margin: 0.5px 2px 0 2px !important;
     flex: auto;
     height: min-content;
@@ -32,16 +36,9 @@
 }
 
 .weather-icon {
-    width: 16px;
-    height: 16px;
     margin-top: 2px !important;
-    margin-bottom: -2px !important;
 }
 
-.weather-type-label{
-    margin-bottom: 2px !important;
-    font-size: small;
-}
 .selected-icon {
     filter: invert(100%);
 }
@@ -50,11 +47,11 @@
     filter: invert(0%);
 }
 
-.weather-stepper {
+.v-stepper {
     box-shadow: 0 0 0 0 !important;
 }
 
-.weather-stepper-header {
+.v-stepper__header {
     height: auto !important;
     text-align: center;
     box-shadow: 0 0 0 0 !important;
@@ -66,6 +63,7 @@
 
 .v-stepper__content {
     padding: 0 4px 0 4px!important;
+    z-index: 1000;
 }
 
 /* Element zwischen Slidern entfernt */
@@ -79,24 +77,39 @@
 }
 
 /* Slidernbuttongröße */
-.custom-slider .v-slider__thumb.primary {
+.v-slider__thumb.primary {
     width: 14px !important;
     height: 14px !important;
+}
+
+.v-slider__thumb-label{
+    height: 24px !important;
+    width: 24px !important;
+    margin-bottom: -4px !important;
 }
 
 /* Margin unterhalb des Sliders auf Null gesetzt */
 .v-input__slot{
     margin-bottom: 0 !important;
+
 }
 /* Margin überhalb der Checkbox bei snowy */
-.custom-checkbox{
-    margin-top: 6px !important;
-}
-/* Checkbox bei snowy in der einheitlichen Farbe */
-.accent--text .custom-checkbox {
-    color: #0078d4 !important;
+.v-input{
+    margin-top: 4px !important;
+    margin-bottom: 0 !important;
 }
 
-.dijitDialogPaneContent {
-    height: auto !important;
+.v-input__prepend-outer{
+    font-size: x-small !important;
 }
+.v-input__append-outer{
+    font-size: x-small !important;
+}
+
+.v-stepper__wrapper p{
+    font-size: 16px;
+    text-align: center ;
+    margin: 4px 0 !important;
+}
+
+

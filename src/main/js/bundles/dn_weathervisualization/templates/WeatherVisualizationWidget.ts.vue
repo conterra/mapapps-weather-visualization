@@ -16,134 +16,177 @@
 
 -->
 <template>
-    <div class="weather-visualization-widget">
-        <v-container>
-            <v-stepper
-                v-model="activeWeather"
-                non-linear
-                class="weather-stepper"
-            >
-                <v-stepper-header
-                    class="weather-stepper-header"
-                >
-                    <v-stepper-item
-                        v-for="weatherType in weatherTypes"
-                        :key="weatherType"
-                        :name="weatherType"
-                        :class="{'weather-type': true, 'is-selected': weatherType === activeWeather}"
-                        class="weather-type"
-                        @click="handleWeatherChange(weatherType)"
-                    >
-                        <div>
-                            <img
-                                :src="iconBaseURL.replace('{WEATHERTYPE}', weatherType)"
-                                :class="{'selected-icon': weatherType === activeWeather,
-                                         'unselected-icon': weatherType !== activeWeather}"
-                                class="weather-icon"
-                                alt=""
-                            >
-                            <div class="weather-type-label">
-                                {{ weatherType }}
-                            </div>
-                        </div>
-                    </v-stepper-item>
-                </v-stepper-header>
-
-                <v-stepper-content
+    <div>
+        <v-stepper
+            v-model="activeWeather"
+            non-linear
+        >
+            <v-stepper-header>
+                <v-stepper-item
                     v-for="weatherType in weatherTypes"
                     :key="weatherType"
-                    :step="weatherType"
+                    :name="weatherType"
+                    :class="{'weather-type': true, 'is-selected': weatherType === activeWeather}"
+                    @click="handleWeatherChange(weatherType)"
                 >
-                    <div v-if="activeWeather === 'sunny'">
-                        <v-slider
-                            v-model="sunnyCloudCover"
-                            label="cloud cover"
-                            :max="1"
-                            :min="0"
-                            :step="0.1"
-                            class="custom-slider"
-                            @input="sunnySettings.cloudCover = sunnyCloudCover"
-                        />
+                    <div>
+                        <img
+                            :src="iconBaseURL.replace('{WEATHERTYPE}', weatherType)"
+                            :class="{'selected-icon': weatherType === activeWeather,
+                                     'unselected-icon': weatherType !== activeWeather}"
+                            class="weather-icon"
+                            :alt="weatherType"
+                            :aria-label="weatherType"
+                        >
                     </div>
-                    <div v-if="activeWeather === 'cloudy'">
-                        <v-slider
-                            v-model="cloudyCloudCover"
-                            label="cloud cover"
-                            :max="1"
-                            :min="0"
-                            :step="0.1"
-                            class="custom-slider"
-                            @input="cloudySettings.cloudCover = cloudyCloudCover"
-                        />
-                    </div>
+                </v-stepper-item>
+            </v-stepper-header>
 
-                    <div v-if="activeWeather === 'rainy'">
-                        <v-slider
-                            v-model="rainyCloudCover"
-                            label="cloud cover"
-                            :max="1"
-                            :min="0"
-                            :step="0.1"
-                            class="custom-slider"
-                            @input="rainySettings.cloudCover = rainyCloudCover"
-                        />
-                        <v-slider
-                            v-model="rainyPrecipitation"
-                            label="precipitation"
-                            :max="1"
-                            :min="0"
-                            :step="0.1"
-                            class="custom-slider"
-                            @input="rainySettings.precipitation = rainyPrecipitation"
-                        />
-                    </div>
-                    <div v-if="activeWeather === 'snowy'">
-                        <v-slider
-                            v-model="snowyCloudCover"
-                            label="cloud cover"
-                            :max="1"
-                            :min="0"
-                            :step="0.1"
-                            class="custom-slider"
-                            @input="snowySettings.cloudCover = snowyCloudCover"
-                        />
-                        <v-slider
-                            v-model="snowyPrecipitation"
-                            label="precipitation"
-                            :max="1"
-                            :min="0"
-                            :step="0.1"
-                            class="custom-slider"
-                            @input="snowySettings.precipitation = snowyPrecipitation"
-                        />
-                        <v-checkbox
-                            v-model="snowCover"
-                            label="snow cover"
-                            class="custom-checkbox"
-                            @change="snowySettings.snowCover = snowCover ? 'enabled' : 'disabled'"
-                        />
-                    </div>
-                    <div v-if="activeWeather === 'foggy'">
-                        <v-slider
-                            v-model="fogStrength"
-                            label="fog strength"
-                            :max="1"
-                            :min="0"
-                            :step="0.1"
-                            class="custom-slider"
-                            @input="foggySettings.fogStrength = fogStrength"
-                        />
-                    </div>
-                </v-stepper-content>
-            </v-stepper>
-        </v-container>
+            <v-stepper-content
+                v-for="weatherType in weatherTypes"
+                :key="weatherType"
+                :step="weatherType"
+            >
+                <div v-if="activeWeather === 'sunny'">
+                    <p>{{ i18n.weather.cloudCover }}</p>
+                    <v-slider
+                        v-model="sunnyCloudCover"
+                        thumb-label="true"
+                        :max="1"
+                        :min="0"
+                        :step="0.1"
+                    >
+                        <template #prepend>
+                            {{ i18n.weather.cloudCoverDecrease }}
+                        </template>
+                        <template #append>
+                            {{ i18n.weather.cloudCoverIncrease }}
+                        </template>
+                    </v-slider>
+                </div>
+                <div v-if="activeWeather === 'cloudy'">
+                    <p>{{ i18n.weather.cloudCover }}</p>
+                    <v-slider
+                        v-model="cloudyCloudCover"
+                        thumb-label="true"
+                        :max="1"
+                        :min="0"
+                        :step="0.1"
+                    >
+                        <template #prepend>
+                            {{ i18n.weather.cloudCoverDecrease }}
+                        </template>
+                        <template #append>
+                            {{ i18n.weather.cloudCoverIncrease }}
+                        </template>
+                    </v-slider>
+                </div>
+
+                <div v-if="activeWeather === 'rainy'">
+                    <p>{{ i18n.weather.cloudCover }}</p>
+                    <v-slider
+                        v-model="rainyCloudCover"
+                        thumb-label="true"
+                        :max="1"
+                        :min="0"
+                        :step="0.1"
+                    >
+                        <template #prepend>
+                            {{ i18n.weather.cloudCoverDecrease }}
+                        </template>
+                        <template #append>
+                            {{ i18n.weather.cloudCoverIncrease }}
+                        </template>
+                    </v-slider>
+                    <p>{{ i18n.weather.precipitation }}</p>
+                    <v-slider
+                        v-model="rainyPrecipitation"
+                        thumb-label="true"
+                        :max="1"
+                        :min="0"
+                        :step="0.1"
+                    >
+                        <template #prepend>
+                            {{ i18n.weather.precipitationDecrease }}
+                        </template>
+                        <template #append>
+                            {{ i18n.weather.precipitationIncrease }}
+                        </template>
+                    </v-slider>
+                </div>
+                <div v-if="activeWeather === 'snowy'">
+                    <p>{{ i18n.weather.cloudCover }}</p>
+                    <v-slider
+                        v-model="snowyCloudCover"
+                        thumb-label="true"
+                        :max="1"
+                        :min="0"
+                        :step="0.1"
+                    >
+                        <template #prepend>
+                            {{ i18n.weather.cloudCoverDecrease }}
+                        </template>
+                        <template #append>
+                            {{ i18n.weather.cloudCoverIncrease }}
+                        </template>
+                    </v-slider>
+                    <p>{{ i18n.weather.precipitation }}</p>
+                    <v-slider
+                        v-model="snowyPrecipitation"
+                        thumb-label="true"
+                        :max="1"
+                        :min="0"
+                        :step="0.1"
+                    >
+                        <template #prepend>
+                            {{ i18n.weather.precipitationDecrease }}
+                        </template>
+                        <template #append>
+                            {{ i18n.weather.precipitationIncrease }}
+                        </template>
+                    </v-slider>
+                    <v-checkbox
+                        v-model="snowCover"
+                        :label="i18n.weather.snowCover"
+                        color="primary"
+                        class="custom-checkbox"
+                    />
+                </div>
+                <div v-if="activeWeather === 'foggy'">
+                    <p>{{ i18n.weather.fogStrength }}</p>
+                    <v-slider
+                        v-model="fogStrength"
+                        thumb-label="true"
+                        :max="1"
+                        :min="0"
+                        :step="0.1"
+                        @input="foggySettings.fogStrength = fogStrength"
+                    >
+                        <template #prepend>
+                            {{ i18n.weather.fogStrengthDecrease }}
+                        </template>
+                        <template #append>
+                            {{ i18n.weather.fogStrengthIncrease }}
+                        </template>
+                    </v-slider>
+                </div>
+            </v-stepper-content>
+        </v-stepper>
     </div>
 </template>
 
 <script lang="ts">
+    import Bindable from "apprt-vue/mixins/Bindable";
+    import i18n from "dn_weathervisualization/nls/bundle";
     export default {
-        name: 'weather-visualization-widget',
+        mixins: [Bindable],
         props: {
+            i18n: {
+                type: Object,
+                default: (): Object => {
+                    return {};
+                }
+            },
             activeWeather:{
                 type: String,
                 default: "sunny"
@@ -154,53 +197,44 @@
             },
             cloudySettings: {
                 type: Object,
-                default: () => {}
+                default: (): any => {}
             },
             foggySettings: {
                 type: Object,
-                default: () => {}
+                default: (): any => {}
             },
             rainySettings: {
                 type: Object,
-                default: () => {}
+                default: (): any => {}
             },
             snowySettings: {
                 type: Object,
-                default: () => {}
+                default: (): any => {}
             },
             sunnySettings: {
                 type: Object,
-                default: () => {}
+                default: (): any => {}
             },
             iconBaseURL: {
                 type: String,
                 default: ""
             }
         },
-        data() {
+
+        data: (): any => {
             return {
-                sunnyCloudCover: 0,
-                cloudyCloudCover: 0,
-                rainyCloudCover: 0,
-                snowyCloudCover: 0,
-                rainyPrecipitation: 0,
-                snowyPrecipitation: 0,
-                fogStrength: 0,
-                snowCover: false
+                sunnyCloudCover: undefined as number | undefined,
+                cloudyCloudCover: undefined as number | undefined,
+                rainyCloudCover: undefined as number | undefined,
+                rainyPrecipitation: undefined as number | undefined,
+                fogStrength: undefined as number | undefined,
+                snowyCloudCover: undefined as number | undefined,
+                snowyPrecipitation: undefined as number | undefined,
+                snowCover: undefined as boolean | undefined
             };
         },
-        mounted() {
-            this.sunnyCloudCover = this.sunnySettings.cloudCover;
-            this.cloudyCloudCover = this.cloudySettings.cloudCover;
-            this.rainyCloudCover = this.rainySettings.cloudCover;
-            this.rainyPrecipitation = this.rainySettings.precipitation;
-            this.snowyCloudCover = this.snowySettings.cloudCover;
-            this.snowyPrecipitation = this.snowySettings.precipitation;
-            this.fogStrength = this.foggySettings.fogStrength;
-            this.snowCover = this.snowySettings.snowCover === 'enabled';
-        },
         methods: {
-            handleWeatherChange(weatherType: string) {
+            handleWeatherChange(weatherType: string): void {
                 this.activeWeather = weatherType;
                 this.$emit('weather-change', this.activeWeather);
             }

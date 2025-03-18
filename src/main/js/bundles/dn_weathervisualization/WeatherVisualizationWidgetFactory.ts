@@ -19,21 +19,41 @@ import VueDijit from "apprt-vue/VueDijit";
 import WeatherVisualizationWidget from "./templates/WeatherVisualizationWidget.ts.vue";
 import WeatherViewModel from "esri/widgets/Weather/WeatherViewModel";
 import Binding from "apprt-binding/Binding";
+import type {InjectedReference} from "apprt-core/InjectedReference";
+import type {MapWidgetModel} from "map-widget/api";
 
 export class WeatherVisualizationWidgetFactory {
-    private binding = undefined;
-    private vm = undefined;
-    private weatherViewModel = undefined;
+    private binding?: Binding ;
+    private vm?: any;
+    private weatherViewModel?: __esri.WeatherViewModel;
+    private _properties: InjectedReference<Record<string, any>>;
+    private _mapWidgetModel: InjectedReference<MapWidgetModel>;
+    private snowyBinding?: Binding;
+    private sunnyBinding?: Binding;
+    private cloudyBinding?: Binding;
+    private foggyBinding?: Binding;
+    private rainyBinding?: Binding;
+    private currentWeatherBinding?: Binding;
+    private readonly _i18n!: InjectedReference<any>;
 
-    _initComponent() {
-        const properties = this._properties;
+    public activate(): void {
+        this.initComponent();
+    }
+    public deactivate(): void {
+        // remove the binding
+        this.binding = undefined;
+    }
+
+    private initComponent(): void {
+        const properties = this._properties!;
         const vm = this.vm = new Vue(WeatherVisualizationWidget);
+        vm.i18n = this._i18n.get().ui;
         this.getView().then((view: __esri.MapView | __esri.SceneView) => {
             this.weatherViewModel = new WeatherViewModel({
                 view: view
             });
 
-            this.binding = this.createBinding(vm);
+            this.createBinding(vm);
         });
 
         vm.$on("weather-change", (evt: any) => {
@@ -42,32 +62,49 @@ export class WeatherVisualizationWidgetFactory {
         vm.iconBaseURL = properties.iconBaseURL;
     }
 
-    createBinding(vm: any) {
-        const model = this.weatherViewModel;
-
-        return Binding.for(model.weatherByType, vm)
-            .sync("cloudy", "cloudySettings")
-            .sync("foggy", "foggySettings")
-            .sync("rainy", "rainySettings")
-            .sync("snowy", "snowySettings")
-            .sync("sunny", "sunnySettings")
+    private createBinding(vm: any): void {
+        const model = this.weatherViewModel!;
+        this.snowyBinding = Binding.for(model.weatherByType.snowy, vm)
+            .sync("cloudCover", "snowyCloudCover")
+            .sync("precipitation", "snowyPrecipitation")
+            .sync("snowCover", "snowCover", (snowCover) => {
+                if(snowCover === "enabled") return true;
+                else return false;},
+            (snowCover) => {
+                if(snowCover) return "enabled";
+                else return "disabled";})
+            .enable()
+            .syncToRightNow();
+        this.sunnyBinding = Binding.for(model.weatherByType.sunny, vm)
+            .sync("cloudCover", "sunnyCloudCover")
+            .enable()
+            .syncToRightNow();
+        this.cloudyBinding = Binding.for(model.weatherByType.cloudy, vm)
+            .sync("cloudCover", "cloudyCloudCover")
+            .enable()
+            .syncToRightNow();
+        this.foggyBinding = Binding.for(model.weatherByType.foggy, vm)
+            .sync("fogStrength", "fogStrength")
+            .enable()
+            .syncToRightNow();
+        this.rainyBinding = Binding.for(model.weatherByType.rainy, vm)
+            .sync("cloudCover", "rainyCloudCover")
+            .sync("precipitation", "rainyPrecipitation")
+            .enable()
+            .syncToRightNow();
+        this.currentWeatherBinding = Binding.for(model.current, vm)
+            .sync("type", "currentWeather")
             .enable()
             .syncToRightNow();
     }
 
-    createInstance(): any {
-        const vm = this.vm;
+    public createInstance(): typeof VueDijit {
         return VueDijit(this.vm, { class: "weather-visualization-widget" });
     }
 
-    activate() {
-        this._initComponent();
-    }
-    deactivate() {
 
-    }
     private getView(): Promise<__esri.MapView | __esri.SceneView> {
-        const mapWidgetModel = this._mapWidgetModel;
+        const mapWidgetModel = this._mapWidgetModel!;
         return new Promise((resolve) => {
             if (mapWidgetModel.view) {
                 resolve(mapWidgetModel.view);
@@ -79,42 +116,9 @@ export class WeatherVisualizationWidgetFactory {
             }
         });
     }
-    handleWeatherChange(weatherType: string): void {
+    private handleWeatherChange(weatherType: "sunny" | "cloudy" | "rainy" | "snowy" | "foggy"): void {
         if (this.weatherViewModel) {
             this.weatherViewModel.setWeatherByType(weatherType);
-        }
-    }
-    handleCloudCoverChange(cloudCover: number):void {
-        if(this.weatherViewModel){
-            const weatherType = this.weatherViewModel.current;
-            if (weatherType) {
-                weatherType.cloudCover = cloudCover;
-            }
-        }
-    }
-    handlePrecipitationChange(precipitation: number):void {
-        if(this.weatherViewModel){
-            const weatherType = this.weatherViewModel.current;
-            if (weatherType) {
-                weatherType.precipitation = precipitation;
-            }
-        }
-    }
-    handlefogStrengthChange(fogStrength: number):void {
-        if(this.weatherViewModel){
-            const weatherType = this.weatherViewModel.current;
-            weatherType.fogStrength= fogStrength;
-        }
-    }
-    handleSnowCoverChange(snowCover: boolean):void {
-        if(this.weatherViewModel){
-            const weatherType = this.weatherViewModel.current;
-            if(snowCover){
-                weatherType.snowCover = "enabled";
-            }else{
-                weatherType.snowCover = "disabled";
-            }
-
         }
     }
 }

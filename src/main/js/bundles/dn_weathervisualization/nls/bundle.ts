@@ -23,7 +23,24 @@ const i18n = {
             tooltip: "weather visualization"
         },
         ui: {
-            windowTitle: "Weather visualization"
+            windowTitle: "Weather visualization",
+            weather:{
+                sunny: "Sunny",
+                cloudy: "Cloudy",
+                rainy: "Rainy",
+                snowy: "Snowy",
+                foggy: "Foggy",
+                precipitation: "Precipitation",
+                precipitationIncrease: "Precipitation increase",
+                precipitationDecrease: "Precipitation decrease",
+                cloudCover: "Cloud cover",
+                cloudCoverIncrease: "Cloud cover increase",
+                cloudCoverDecrease: "Cloud cover decrease",
+                fogStrength: "Fog strength",
+                fogStrengthIncrease: "Fog strength increase",
+                fogStrengthDecrease: "Fog strength decrease",
+                snowCover: "Snow cover"
+            }
         }
     }),
     "de": true

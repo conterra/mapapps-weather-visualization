@@ -24,7 +24,24 @@ const i18n = {
         tooltip: "Wettervisualisierung"
     },
     ui:{
-        windowTitle: "Wettervisualisierung"
+        windowTitle: "Wettervisualisierung",
+        weather:{
+            sunny: "Sonnig",
+            cloudy: "Bewölkt",
+            rainy: "Regnerisch",
+            snowy: "Schneefall",
+            foggy: "Nebelig",
+            precipitation: "Niederschlag",
+            precipitationIncrease: "Niederschlag erhöhen",
+            precipitationDecrease: "Niederschlag verringern",
+            cloudCover: "Bewölkung",
+            cloudCoverIncrease: "Bewölkung erhöhen",
+            cloudCoverDecrease: "Bewölkung verringern",
+            fogStrength: "Nebelstärke",
+            fogStrengthIncrease: "Nebelstärke erhöhen",
+            fogStrengthDecrease: "Nebelstärke verringern",
+            snowCover: "Schneedecke"
+        }
     }
 } satisfies Messages;
 
