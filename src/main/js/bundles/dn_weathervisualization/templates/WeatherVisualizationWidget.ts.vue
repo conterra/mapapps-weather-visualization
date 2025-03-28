@@ -176,16 +176,19 @@
 </template>
 
 <script lang="ts">
+    import Vue, { PropType } from "vue";
     import Bindable from "apprt-vue/mixins/Bindable";
 
     import type { Messages } from "../nls/bundle";
 
-    export default {
+    export default Vue.extend({
         mixins: [Bindable],
         props: {
             i18n: {
-                type: Object as () => Messages,
-                default: (): Messages => ({} as Messages)
+                type: Object as PropType<Messages>,
+                default: function (): Messages {
+                    return {} as Messages;
+                }
             },
             activeWeather:{
                 type: String,
@@ -220,7 +223,7 @@
                 default: ""
             }
         },
-        data: (): any => {
+        data() {
             return {
                 sunnyCloudCover: undefined as number | undefined,
                 cloudyCloudCover: undefined as number | undefined,
@@ -236,7 +239,8 @@
             handleWeatherChange(weatherType: string): void {
                 this.activeWeather = weatherType;
                 this.$emit('weather-change', this.activeWeather);
+                this.i18n;
             }
         }
-    };
+    });
 </script>
