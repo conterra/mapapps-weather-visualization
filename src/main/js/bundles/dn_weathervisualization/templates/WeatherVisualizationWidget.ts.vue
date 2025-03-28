@@ -239,7 +239,6 @@
             handleWeatherChange(weatherType: string): void {
                 this.activeWeather = weatherType;
                 this.$emit('weather-change', this.activeWeather);
-                this.i18n;
             }
         }
     });
