@@ -25,7 +25,6 @@
             "search-ui",
             "locator-store",
             "toc",
-            "sample_helloworld",
             "dn_weathervisualization"
         ]
     },
