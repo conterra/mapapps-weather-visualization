@@ -177,15 +177,15 @@
 
 <script lang="ts">
     import Bindable from "apprt-vue/mixins/Bindable";
-    import i18n from "dn_weathervisualization/nls/bundle";
+
+    import type { Messages } from "../nls/bundle";
+
     export default {
         mixins: [Bindable],
         props: {
             i18n: {
-                type: Object,
-                default: (): Object => {
-                    return {};
-                }
+                type: Object as () => Messages,
+                default: (): Messages => ({} as Messages)
             },
             activeWeather:{
                 type: String,
@@ -220,7 +220,6 @@
                 default: ""
             }
         },
-
         data: (): any => {
             return {
                 sunnyCloudCover: undefined as number | undefined,
