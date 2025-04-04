@@ -72,7 +72,9 @@
                 "toolRole": "toolset",
                 "togglable": true,
                 "rules": {
-                    "noGroup": true
+                    "noGroup": true,
+                    "viewmode": "3D",
+                    "ruleSuccessProperty": "visibility"
                 }
             }
         }
