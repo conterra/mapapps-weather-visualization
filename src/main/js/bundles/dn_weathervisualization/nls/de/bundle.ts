@@ -18,7 +18,7 @@ import { type Messages } from "../bundle";
 
 const i18n = {
     bundleName: "Wettervisualisierung",
-    bundleDescription: "",
+    bundleDescription: "Dieses Bundle ermöglicht es verschiedene Wetterbedingungen zu simulieren.",
     tool:{
         title: "Wettervisualisierung",
         tooltip: "Wettervisualisierung"

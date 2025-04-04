@@ -17,7 +17,7 @@
 const i18n = {
     root: ({
         bundleName: "weather visualization",
-        bundleDescription: "",
+        bundleDescription: "This bundle adds the functionality to simulate different weather conditions.",
         tool: {
             title: "Weather visualization",
             tooltip: "weather visualization"

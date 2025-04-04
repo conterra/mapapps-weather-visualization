@@ -176,15 +176,18 @@
 </template>
 
 <script lang="ts">
+    import Vue, { PropType } from "vue";
     import Bindable from "apprt-vue/mixins/Bindable";
-    import i18n from "dn_weathervisualization/nls/bundle";
-    export default {
+
+    import type { Messages } from "../nls/bundle";
+
+    export default Vue.extend({
         mixins: [Bindable],
         props: {
             i18n: {
-                type: Object,
-                default: (): Object => {
-                    return {};
+                type: Object as PropType<Messages>,
+                default: function (): Messages {
+                    return {} as Messages;
                 }
             },
             activeWeather:{
@@ -220,8 +223,7 @@
                 default: ""
             }
         },
-
-        data: (): any => {
+        data() {
             return {
                 sunnyCloudCover: undefined as number | undefined,
                 cloudyCloudCover: undefined as number | undefined,
@@ -239,5 +241,5 @@
                 this.$emit('weather-change', this.activeWeather);
             }
         }
-    };
+    });
 </script>

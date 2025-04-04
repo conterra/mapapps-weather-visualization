@@ -14,7 +14,7 @@
         "apprt-vuetify": "^4.18.0",
         "apprt-binding": "^4.18.0"
     },
-    "productName": "devnet-mapapps-devnet-weathervisualization",
+    "productName": "devnet-mapapps-weathervisualization",
     "layout-widgets": [
         {
             "widgetRole": "weatherVisualizationWidget",
