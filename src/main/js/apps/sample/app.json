@@ -25,7 +25,6 @@
             "search-ui",
             "locator-store",
             "toc",
-            "sample_helloworld",
             "dn_weathervisualization"
         ]
     },
@@ -442,13 +441,12 @@
                     {
                         "id": "mapview_tools",
                         "tools": [
+                            "weatherVisualizationToogleTool",
                             "locateMeTool",
                             "zoomInTool",
                             "zoomOutTool",
                             "compassTool",
-                            "restoreInitialViewTool",
-                            "viewmodeSwitcherTool",
-                            "weatherVisualizationToogleTool"
+                            "restoreInitialViewTool"
                         ],
                         "registerWidget": {
                             "widgetRole": "mapview_tools"
