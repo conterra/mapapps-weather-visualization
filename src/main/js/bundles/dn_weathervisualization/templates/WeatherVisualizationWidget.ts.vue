@@ -51,7 +51,7 @@
                     <p>{{ i18n.weather.cloudCover }}</p>
                     <v-slider
                         v-model="sunnyCloudCover"
-                        thumb-label="true"
+                        thumb-label
                         :max="1"
                         :min="0"
                         :step="0.1"
@@ -68,7 +68,7 @@
                     <p>{{ i18n.weather.cloudCover }}</p>
                     <v-slider
                         v-model="cloudyCloudCover"
-                        thumb-label="true"
+                        thumb-label
                         :max="1"
                         :min="0"
                         :step="0.1"
@@ -86,7 +86,7 @@
                     <p>{{ i18n.weather.cloudCover }}</p>
                     <v-slider
                         v-model="rainyCloudCover"
-                        thumb-label="true"
+                        thumb-label
                         :max="1"
                         :min="0"
                         :step="0.1"
@@ -101,7 +101,7 @@
                     <p>{{ i18n.weather.precipitation }}</p>
                     <v-slider
                         v-model="rainyPrecipitation"
-                        thumb-label="true"
+                        thumb-label
                         :max="1"
                         :min="0"
                         :step="0.1"
@@ -118,7 +118,7 @@
                     <p>{{ i18n.weather.cloudCover }}</p>
                     <v-slider
                         v-model="snowyCloudCover"
-                        thumb-label="true"
+                        thumb-label
                         :max="1"
                         :min="0"
                         :step="0.1"
@@ -133,7 +133,7 @@
                     <p>{{ i18n.weather.precipitation }}</p>
                     <v-slider
                         v-model="snowyPrecipitation"
-                        thumb-label="true"
+                        thumb-label
                         :max="1"
                         :min="0"
                         :step="0.1"
@@ -156,7 +156,7 @@
                     <p>{{ i18n.weather.fogStrength }}</p>
                     <v-slider
                         v-model="fogStrength"
-                        thumb-label="true"
+                        thumb-label
                         :max="1"
                         :min="0"
                         :step="0.1"
