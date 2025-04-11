@@ -22,14 +22,15 @@
             non-linear
         >
             <v-stepper-header>
-                <v-stepper-item
+                <v-stepper-step
                     v-for="weatherType in weatherTypes"
                     :key="weatherType"
-                    :name="weatherType"
+                    :step="weatherType"
                     :class="{'weather-type': true, 'is-selected': weatherType === activeWeather}"
                     @click="handleWeatherChange(weatherType)"
                 >
                     <div>
+                        {{ iconBaseURL.replace('{WEATHERTYPE}', weatherType) }}
                         <img
                             :src="iconBaseURL.replace('{WEATHERTYPE}', weatherType)"
                             :class="{'selected-icon': weatherType === activeWeather,
@@ -39,7 +40,7 @@
                             :aria-label="weatherType"
                         >
                     </div>
-                </v-stepper-item>
+                </v-stepper-step>
             </v-stepper-header>
 
             <v-stepper-content
