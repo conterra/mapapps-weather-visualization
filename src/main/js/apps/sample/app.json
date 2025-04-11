@@ -25,6 +25,7 @@
             "search-ui",
             "locator-store",
             "toc",
+            "toolrules",
             "dn_weathervisualization"
         ]
     },
@@ -485,6 +486,13 @@
                             "before"
                         ]
                     }
+                ]
+            }
+        },
+        "toolrules": {
+            "ToolActiveStateManager": {
+                "activateOnStartToolIds": [
+                    "weatherVisualizationToogleTool"
                 ]
             }
         }
