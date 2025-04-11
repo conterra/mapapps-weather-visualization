@@ -22,24 +22,23 @@
             non-linear
         >
             <v-stepper-header>
-                <v-stepper-item
+                <v-stepper-step
                     v-for="weatherType in weatherTypes"
                     :key="weatherType"
-                    :name="weatherType"
-                    :class="{'weather-type': true, 'is-selected': weatherType === activeWeather}"
+                    :step="weatherType"
+                    :class="{'is-selected': weatherType === activeWeather}"
                     @click="handleWeatherChange(weatherType)"
                 >
                     <div>
                         <img
                             :src="iconBaseURL.replace('{WEATHERTYPE}', weatherType)"
-                            :class="{'selected-icon': weatherType === activeWeather,
-                                     'unselected-icon': weatherType !== activeWeather}"
+                            :class="{'selected-icon': weatherType === activeWeather}"
                             class="weather-icon"
                             :alt="weatherType"
                             :aria-label="weatherType"
                         >
                     </div>
-                </v-stepper-item>
+                </v-stepper-step>
             </v-stepper-header>
 
             <v-stepper-content
@@ -51,7 +50,6 @@
                     <p>{{ i18n.weather.cloudCover }}</p>
                     <v-slider
                         v-model="sunnyCloudCover"
-                        thumb-label="true"
                         :max="1"
                         :min="0"
                         :step="0.1"
@@ -68,7 +66,6 @@
                     <p>{{ i18n.weather.cloudCover }}</p>
                     <v-slider
                         v-model="cloudyCloudCover"
-                        thumb-label="true"
                         :max="1"
                         :min="0"
                         :step="0.1"
@@ -86,7 +83,6 @@
                     <p>{{ i18n.weather.cloudCover }}</p>
                     <v-slider
                         v-model="rainyCloudCover"
-                        thumb-label="true"
                         :max="1"
                         :min="0"
                         :step="0.1"
@@ -101,7 +97,6 @@
                     <p>{{ i18n.weather.precipitation }}</p>
                     <v-slider
                         v-model="rainyPrecipitation"
-                        thumb-label="true"
                         :max="1"
                         :min="0"
                         :step="0.1"
@@ -118,7 +113,6 @@
                     <p>{{ i18n.weather.cloudCover }}</p>
                     <v-slider
                         v-model="snowyCloudCover"
-                        thumb-label="true"
                         :max="1"
                         :min="0"
                         :step="0.1"
@@ -133,7 +127,6 @@
                     <p>{{ i18n.weather.precipitation }}</p>
                     <v-slider
                         v-model="snowyPrecipitation"
-                        thumb-label="true"
                         :max="1"
                         :min="0"
                         :step="0.1"
@@ -156,7 +149,6 @@
                     <p>{{ i18n.weather.fogStrength }}</p>
                     <v-slider
                         v-model="fogStrength"
-                        thumb-label="true"
                         :max="1"
                         :min="0"
                         :step="0.1"

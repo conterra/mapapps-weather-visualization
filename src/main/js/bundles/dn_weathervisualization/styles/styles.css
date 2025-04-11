@@ -13,103 +13,77 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- .dijitDialog{
+.dijitDialog {
     height: fit-content !important;
-    width: 300px !important;
 }
+
 .dijitDialogPaneContent {
     height: auto !important;
 }
-.weather-type {
-    cursor: pointer;
-    padding: 0.5em;
-    border: 1px solid #afafaf;
-    border-radius: 5px;
-    margin: 0.5px 2px 0 2px !important;
-    flex: auto;
-    height: min-content;
-}
 
-.weather-type.is-selected {
-    background-color: #007ac2;
-    color: #fff;
-}
+.vue-base.weather-visualization-widget {
+    .v-stepper {
+        box-shadow: 0 0 0 0;
 
-.weather-icon {
-    margin-top: 2px !important;
-}
+        .v-stepper__header {
+            height: auto;
+            text-align: center;
+            box-shadow: 0 0 0 0;
 
-.selected-icon {
-    filter: invert(100%);
-}
+            .v-stepper__step {
+                place-content: center space-around;
+                cursor: pointer;
+                padding: 0.5em;
+                border: 1px solid #afafaf;
+                border-radius: 5px;
+                margin: 0.5px 2px 0 2px;
+                flex: auto;
+                height: min-content;
 
-.unselected-icon {
-    filter: invert(0%);
-}
+                .selected-icon {
+                    filter: invert(100%);
+                }
+            }
 
-.v-stepper {
-    box-shadow: 0 0 0 0 !important;
-}
+            .v-stepper__step.is-selected {
+                background-color: #007ac2;
+                color: #fff;
+            }
 
-.v-stepper__header {
-    height: auto !important;
-    text-align: center;
-    box-shadow: 0 0 0 0 !important;
-}
+            .v-stepper__step__step {
+                display: none;
+            }
+        }
 
-.container {
-    padding: 0 !important;
-}
+        .v-stepper__content {
+            padding: 0 4px 0 4px;
 
-.v-stepper__content {
-    padding: 0 4px 0 4px!important;
-    z-index: 1000;
-}
+            .v-stepper__wrapper {
+                padding-top: 15px;
 
-/* Element zwischen Slidern entfernt */
-.v-messages.theme--light {
-    display: none;
-}
+                .v-input {
+                    margin-top: 4px;
+                    margin-bottom: 0;
 
-/* Schriftgröße des Label von Slider und Checkbox  */
-.v-label.theme--light {
-    font-size: 14px !important;
-}
+                    .v-input__prepend-outer {
+                        font-size: x-small;
+                    }
 
-/* Slidernbuttongröße */
-.v-slider__thumb.primary {
-    width: 14px !important;
-    height: 14px !important;
-}
+                    .v-input__append-outer {
+                        font-size: x-small;
+                    }
+                }
 
-.v-slider__thumb-label{
-    height: 24px !important;
-    width: 24px !important;
-    margin-bottom: -4px !important;
-}
+                .v-messages.theme--light {
+                    display: none;
+                }
 
-/* Margin unterhalb des Sliders auf Null gesetzt */
-.v-input__slot{
-    margin-bottom: 0 !important;
-
+                p {
+                    font-size: 16px;
+                    text-align: center;
+                    margin: 4px 0;
+                }
+            }
+        }
+    }
 }
-/* Margin überhalb der Checkbox bei snowy */
-.v-input{
-    margin-top: 4px !important;
-    margin-bottom: 0 !important;
-}
-
-.v-input__prepend-outer{
-    font-size: x-small !important;
-}
-.v-input__append-outer{
-    font-size: x-small !important;
-}
-
-.v-stepper__wrapper p{
-    font-size: 16px;
-    text-align: center ;
-    margin: 4px 0 !important;
-}
-
-
