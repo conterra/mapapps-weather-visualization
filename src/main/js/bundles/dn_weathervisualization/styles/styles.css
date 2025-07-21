@@ -14,11 +14,8 @@
  * limitations under the License.
  */
 .weatherVisualizationWidget.dijitDialog {
-    height: fit-content !important;
-
-    .dijitDialogPaneContent {
-        height: auto !important;
-    }
+    height: 160px !important;
+    width: 300px !important;
 }
 
 .vue-base.weather-visualization-widget {
@@ -26,7 +23,7 @@
         box-shadow: 0 0 0 0;
 
         .v-stepper__header {
-            height: auto;
+            height: fit-content;
             text-align: center;
             box-shadow: 0 0 0 0;
 
@@ -36,9 +33,13 @@
                 padding: 0.5em;
                 border: 1px solid #afafaf;
                 border-radius: 5px;
-                margin: 0.5px 2px 0 2px;
+                margin: 0.5px 1px 0 2px;
                 flex: auto;
-                height: min-content;
+                height: 35px;
+
+                .v-stepper__label {
+                    display: inline-block !important;
+                }
 
                 .selected-icon {
                     filter: invert(100%);
@@ -59,7 +60,6 @@
             padding: 0 4px 0 4px;
 
             .v-stepper__wrapper {
-                padding-top: 15px;
 
                 .v-input {
                     margin-top: 4px;
@@ -86,4 +86,8 @@
             }
         }
     }
+}
+.dijitDialogPaneContent{
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
 }

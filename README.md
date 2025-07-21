@@ -3,7 +3,7 @@
 # Weather Visualization
 The Weather Visualization Bundle offers a possibility to visualize differenct weather conditions in your 3D applications such as rain, snow and fog.
 
-![Screenshot App](https://github.com/conterra/mapapps-weather-visualization/blob/main/screenshot.JPG)
+![Screenshot App](https://github.com/conterra/mapapps-weather-visualization/blob/main/screenshot.png)
 
 ## Sample app
 https://demos.conterra.de/mapapps/resources/apps/downloads_weathervisualization/index.html
