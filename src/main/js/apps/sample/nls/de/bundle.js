@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 module.exports = {
-    apptitle: "DevNet Bundle Blueprint",
+    apptitle: "Weather Visualization Sample",
     map: {
         basemaps: {
             gray: "Stra\xDFenkarte (grau)",

@@ -15,7 +15,7 @@
  */
 module.exports = {
     root: {
-        apptitle: "DevNet Bundle Blueprint",
+        apptitle: "Weather Visualization Sample",
         map: {
             basemaps: {
                 gray: "Street Map (gray)",
