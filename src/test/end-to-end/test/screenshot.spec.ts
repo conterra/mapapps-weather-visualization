@@ -25,6 +25,8 @@ test('Create Screenshot for GitHub Page', async ({ page }) => {
     const canvas = new MapCanvas(page);
     await canvas.loaded();
 
+    
+
     await expectToMatchScreenshot(page, "screenshot.png", {
         timeout: 10000
     });
