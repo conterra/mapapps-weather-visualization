@@ -6,7 +6,7 @@ The Weather Visualization Bundle offers a possibility to visualize differenct we
 ![Screenshot App](https://github.com/conterra/mapapps-weather-visualization/blob/main/screenshot.png)
 
 ## Sample app
-https://demos.conterra.de/mapapps/resources/apps/downloads_weathervisualization/index.html
+https://demos.conterra.de/mapapps/resources/apps/public_demo_weathervisualization/index.html
 
 ## Installation guide
 1. Add the bundle `dn_weathervisualization` to your app.
