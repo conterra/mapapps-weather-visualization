@@ -5,6 +5,7 @@ on:
 permissions:
   contents: write
   pull-requests: write
+  workflows: write
 
 env:
   TEMPLATE_REPO: conterra/mapapps-devnet-blueprint # Replace with your template repo full name, e.g. 'my-org/template-repo'
