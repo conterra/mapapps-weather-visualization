@@ -1,0 +1,82 @@
+{
+    "name": "dn_weathervisualization",
+    "version": "1.0.2-SNAPSHOT",
+    "title": "${bundleName}",
+    "description": "${bundleDescription}",
+    "vendor": "con terra GmbH",
+    "keywords": [
+        "weather visualization",
+        "digital twin"
+    ],
+    "dependencies": {
+        "esri": "^4.18.0",
+        "apprt-vue": "^4.18.0",
+        "apprt-vuetify": "^4.18.0",
+        "apprt-binding": "^4.18.0"
+    },
+    "productName": "devnet-mapapps-weathervisualization",
+    "layout-widgets": [
+        {
+            "widgetRole": "weatherVisualizationWidget",
+            "window": {
+                "title": "${ui.windowTitle}",
+                "autofocus": false,
+                "dockTool": "weatherVisualizationToogleTool",
+                "minimizeOnClose": true,
+                "resizable": false,
+                "marginBox": {
+                    "t": 120,
+                    "l": 17.5
+                }
+            }
+        }
+    ],
+    "cssThemesExtension": [
+        {
+            "name": "*",
+            "files": [
+                "./styles/styles.css"
+            ]
+        }
+    ],
+    "components": [
+        {
+            "name": "WeatherVisualizationWidgetFactory",
+            "instanceFactory": true,
+            "provides": [
+                "dijit.Widget"
+            ],
+            "properties": {
+                "widgetRole": "weatherVisualizationWidget",
+                "iconBaseURL": "resource('./assets/{WEATHERTYPE}.svg')"
+            },
+            "references": [
+                {
+                    "name": "_mapWidgetModel",
+                    "providing": "map-widget.MapWidgetModel"
+                }
+            ]
+        },
+        {
+            "name": "WeatherVisualizationToogleTool",
+            "impl": "ct/tools/Tool",
+            "provides": [
+                "ct.tools.Tool"
+            ],
+            "propertiesConstructor": true,
+            "properties": {
+                "id": "weatherVisualizationToogleTool",
+                "title": "${tool.title}",
+                "tooltip": "${tool.tooltip}",
+                "iconClass": "icon-cloud",
+                "toolRole": "toolset",
+                "togglable": true,
+                "rules": {
+                    "noGroup": true,
+                    "viewmode": "3D",
+                    "ruleSuccessProperty": "visibility"
+                }
+            }
+        }
+    ]
+}

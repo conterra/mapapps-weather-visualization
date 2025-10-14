@@ -1,0 +1,631 @@
+{
+    "properties": {
+        "title": "${apptitle}"
+    },
+    "load": {
+        "bundleLocations": [
+            "localbundles",
+            "bundles"
+        ],
+        "allowedBundles": [
+            "agssearch",
+            "banner",
+            "basemaptoggler",
+            "languagetoggler",
+            "locateme",
+            "locator-store",
+            "map-init",
+            "map-preload-2D",
+            "mapnavigation",
+            "measurement-2d",
+            "notifier",
+            "parameter-url",
+            "popups-default",
+            "printing",
+            "result-ui",
+            "scalebar",
+            "search-ui",
+            "selection-ui",
+            "sketching",
+            "splashscreen",
+            "system",
+            "template-seasons",
+            "templatelayout",
+            "theme-autumn",
+            "toc",
+            "toolrules",
+            "toolset",
+            "dn_coordinatesearch",
+            "dn_imprintprivacy",
+            "dn_weathervisualization"
+        ],
+        "i18n": [
+            "bundle"
+        ]
+    },
+    "bundles": {
+        "dn_coordinatesearch": {
+            "DecimalCoordinateSearchStore": {
+                "componentEnabled": true,
+                "showExample": false
+            },
+            "UTMCoordinateSearchStore": {
+                "componentEnabled": true,
+                "showExample": false,
+                "conversionMode": "latitude-band-indicators"
+            },
+            "GKCoordinateSearchStore": {
+                "componentEnabled": true,
+                "showExample": false
+            },
+            "PseudoMercatorCoordinateSearchStore": {
+                "componentEnabled": true,
+                "showExample": false
+            }
+        },
+        "agssearch": {
+            "AutoStoreRegistration": {
+                "componentEnabled": true
+            }
+        },
+        "banner": {
+            "BannerWidget": {
+                "label": "Developer Network",
+                "image": "resource('${app}:/assets/logo.svg')",
+                "imageWidth": 150,
+                "imagePosition": "above",
+                "link": "http://conterra.github.io"
+            }
+        },
+        "basemaptoggler": {
+            "Config": {
+                "itemStyles": {
+                    "gray": "icon-thumbnail",
+                    "streets": "icon-thumbnail",
+                    "satellite": "icon-thumbnail",
+                    "hybrid": "icon-thumbnail"
+                }
+            }
+        },
+        "map-init": {
+            "Config": {
+                "basemaps": [
+                    {
+                        "id": "gray",
+                        "basemap": "gray-vector",
+                        "title": "${map.basemaps.gray}",
+                        "thumbnailUrl": "resource('${app}:/assets/gray.png')",
+                        "selected": true
+                    },
+                    {
+                        "id": "streets",
+                        "basemap": "streets-vector",
+                        "title": "${map.basemaps.streets}",
+                        "thumbnailUrl": "resource('${app}:/assets/streets.png')"
+                    },
+                    {
+                        "id": "satellite",
+                        "basemap": "satellite",
+                        "title": "${map.basemaps.topo}",
+                        "thumbnailUrl": "resource('${app}:/assets/topo.png')"
+                    },
+                    {
+                        "id": "hybrid",
+                        "basemap": "hybrid",
+                        "title": "${map.basemaps.hybrid}",
+                        "thumbnailUrl": "resource('${app}:/assets/hybrid.png')"
+                    }
+                ],
+                "map": {
+                    "layers": [
+                        {
+                            "id": "pois",
+                            "title": "${layers.pois}",
+                            "type": "AGS_FEATURE",
+                            "url": "https://services2.arcgis.com/cFEFS0EWrhfDeVw9/arcgis/rest/services/FP__pointsOfInterest__Lyon/FeatureServer",
+                            "labelsVisible ": false,
+                            "labelingInfo": [],
+                            "visible": true,
+                            "elevationInfo": {
+                                "mode": "relative-to-scene"
+                            },
+                            "screenSizePerspectiveEnabled": true,
+                            "featureReduction": {
+                                "type": "selection"
+                            },
+                            "renderer": {
+                                "type": "unique-value",
+                                "field": "TYPE",
+                                "defaultSymbol": {
+                                    "type": "point-3d"
+                                }
+                            }
+                        },
+                        {
+                            "id": "vegetation",
+                            "title": "${layers.vegetation}",
+                            "type": "AGS_FEATURE",
+                            "url": "https://services2.arcgis.com/cFEFS0EWrhfDeVw9/arcgis/rest/services/FP__trees__Lyon/FeatureServer",
+                            "legendEnabled": false,
+                            "visible": false,
+                            "elevationInfo": {
+                                "mode": "on-the-ground"
+                            },
+                            "renderer": {
+                                "type": "unique-value",
+                                "symbol": {
+                                    "type": "web-style",
+                                    "styleName": "esriRealisticTreesStyle",
+                                    "name": "Other"
+                                },
+                                "visualVariables": [
+                                    {
+                                        "type": "size",
+                                        "axis": "height",
+                                        "field": "SIZE",
+                                        "valueUnit": "meters"
+                                    }
+                                ],
+                                "field": "TYPE",
+                                "defaultLabel": "Other",
+                                "uniqueValueInfos": [
+                                    {
+                                        "label": "Platanus",
+                                        "symbol": {
+                                            "type": "point-3d",
+                                            "symbolLayers": [
+                                                {
+                                                    "type": "object",
+                                                    "resource": {
+                                                        "href": "https://staticqa.arcgis.com/arcgis/styleItems/RealisticTrees/web/resource/CornusFlorida.json"
+                                                    },
+                                                    "height": 2.743199912217603
+                                                }
+                                            ],
+                                            "styleOrigin": {
+                                                "styleName": "EsriRealisticTreesStyle",
+                                                "name": "Cornus"
+                                            }
+                                        },
+                                        "value": "Platanus"
+                                    },
+                                    {
+                                        "label": "Quercus",
+                                        "symbol": {
+                                            "type": "point-3d",
+                                            "symbolLayers": [
+                                                {
+                                                    "type": "object",
+                                                    "resource": {
+                                                        "href": "https://staticqa.arcgis.com/arcgis/styleItems/RealisticTrees/web/resource/JuniperusOccidentalis.json"
+                                                    },
+                                                    "height": 2.743199912217603
+                                                }
+                                            ],
+                                            "styleOrigin": {
+                                                "styleName": "EsriRealisticTreesStyle",
+                                                "name": "Juniperus"
+                                            }
+                                        },
+                                        "value": "Quercus"
+                                    },
+                                    {
+                                        "label": "Field Elm",
+                                        "symbol": {
+                                            "type": "point-3d",
+                                            "symbolLayers": [
+                                                {
+                                                    "type": "object",
+                                                    "resource": {
+                                                        "href": "https://staticqa.arcgis.com/arcgis/styleItems/RealisticTrees/web/resource/UlmusMinor.json"
+                                                    },
+                                                    "height": 2.743199912217603
+                                                }
+                                            ],
+                                            "styleOrigin": {
+                                                "styleName": "EsriRealisticTreesStyle",
+                                                "name": "Ulmus"
+                                            }
+                                        },
+                                        "value": "Field Elm"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": "transportation",
+                            "title": "${layers.transportation}",
+                            "type": "AGS_FEATURE",
+                            "visible": false,
+                            "legendEnabled": false,
+                            "url": "https://services2.arcgis.com/cFEFS0EWrhfDeVw9/arcgis/rest/services/FP__Transportation__Lyon/FeatureServer/0",
+                            "elevation-info": {
+                                "mode": "relative-to-scene"
+                            },
+                            "renderer": {
+                                "authoringInfo": {
+                                    "lengthUnit": "meters"
+                                },
+                                "type": "unique-value",
+                                "visualVariables": [
+                                    {
+                                        "type": "rotation",
+                                        "rotation-type": "geographic",
+                                        "field": "ROTATION"
+                                    }
+                                ],
+                                "field": "TYPE",
+                                "defaultLabel": "Other",
+                                "uniqueValueInfos": [
+                                    {
+                                        "label": "Ford Fiesta",
+                                        "symbol": {
+                                            "type": "point-3d",
+                                            "symbolLayers": [
+                                                {
+                                                    "type": "object",
+                                                    "resource": {
+                                                        "href": "https://static.arcgis.com/arcgis/styleItems/RealisticTransportation/web/resource/Ford_Fiesta.json"
+                                                    },
+                                                    "height": 1.7000000000000002
+                                                }
+                                            ],
+                                            "styleOrigin": {
+                                                "styleName": "EsriRealisticTransportationStyle",
+                                                "name": "Ford_Fiesta"
+                                            }
+                                        },
+                                        "value": "Car 6"
+                                    },
+                                    {
+                                        "label": "Audi",
+                                        "symbol": {
+                                            "type": "point-3d",
+                                            "symbolLayers": [
+                                                {
+                                                    "type": "object",
+                                                    "resource": {
+                                                        "href": "https://static.arcgis.com/arcgis/styleItems/RealisticTransportation/web/resource/Audi_A6.json"
+                                                    },
+                                                    "height": 1.5
+                                                }
+                                            ],
+                                            "styleOrigin": {
+                                                "styleName": "EsriRealisticTransportationStyle",
+                                                "name": "Audi_A6"
+                                            }
+                                        },
+                                        "value": "Car 1"
+                                    },
+                                    {
+                                        "label": "Porsche",
+                                        "symbol": {
+                                            "type": "point-3d",
+                                            "symbolLayers": [
+                                                {
+                                                    "type": "object",
+                                                    "resource": {
+                                                        "href": "https://static.arcgis.com/arcgis/styleItems/RealisticTransportation/web/resource/Porsche_Boxter.json"
+                                                    },
+                                                    "height": 1.7000000000000002
+                                                }
+                                            ],
+                                            "styleOrigin": {
+                                                "styleName": "EsriRealisticTransportationStyle",
+                                                "name": "Porsche_Boxter"
+                                            }
+                                        },
+                                        "value": "Car 3"
+                                    },
+                                    {
+                                        "label": "Ford",
+                                        "symbol": {
+                                            "type": "point-3d",
+                                            "symbolLayers": [
+                                                {
+                                                    "type": "object",
+                                                    "resource": {
+                                                        "href": "https://static.arcgis.com/arcgis/styleItems/RealisticTransportation/web/resource/Ford_Expedition.json"
+                                                    },
+                                                    "height": 1.7000000000000002
+                                                }
+                                            ],
+                                            "styleOrigin": {
+                                                "styleName": "EsriRealisticTransportationStyle",
+                                                "name": "Ford_Expedition"
+                                            }
+                                        },
+                                        "value": "Car 4"
+                                    },
+                                    {
+                                        "label": "Volkswagen",
+                                        "symbol": {
+                                            "type": "point-3d",
+                                            "symbolLayers": [
+                                                {
+                                                    "type": "object",
+                                                    "resource": {
+                                                        "href": "https://static.arcgis.com/arcgis/styleItems/RealisticTransportation/web/resource/Volkswagen_Jetta_Wagon.json"
+                                                    },
+                                                    "height": 1.7000000000000002
+                                                }
+                                            ],
+                                            "styleOrigin": {
+                                                "styleName": "EsriRealisticTransportationStyle",
+                                                "name": "Volkswagen_Jetta_Wagon"
+                                            }
+                                        },
+                                        "value": "Car 7"
+                                    },
+                                    {
+                                        "label": "Ambulance",
+                                        "symbol": {
+                                            "type": "point-3d",
+                                            "symbolLayers": [
+                                                {
+                                                    "type": "object",
+                                                    "resource": {
+                                                        "href": "https://staticqa.arcgis.com/arcgis/styleItems/RealisticTransportation/web/resource/Ambulance.json"
+                                                    },
+                                                    "height": 3
+                                                }
+                                            ],
+                                            "styleOrigin": {
+                                                "styleName": "EsriRealisticTransportationStyle",
+                                                "name": "Ambulance"
+                                            }
+                                        },
+                                        "value": "Car 5"
+                                    },
+                                    {
+                                        "label": "Taxi",
+                                        "symbol": {
+                                            "type": "point-3d",
+                                            "symbolLayers": [
+                                                {
+                                                    "type": "object",
+                                                    "resource": {
+                                                        "href": "https://static.arcgis.com/arcgis/styleItems/RealisticTransportation/web/resource/Taxi.json"
+                                                    },
+                                                    "height": 1.7
+                                                }
+                                            ],
+                                            "styleOrigin": {
+                                                "styleName": "EsriRealisticTransportationStyle",
+                                                "name": "Taxi"
+                                            }
+                                        },
+                                        "value": "Car 2"
+                                    },
+                                    {
+                                        "label": "Tram",
+                                        "symbol": {
+                                            "type": "point-3d",
+                                            "symbolLayers": [
+                                                {
+                                                    "type": "object",
+                                                    "resource": {
+                                                        "href": "https://static.arcgis.com/arcgis/styleItems/RealisticTransportation/web/resource/Tram.json"
+                                                    },
+                                                    "height": 5
+                                                }
+                                            ],
+                                            "styleOrigin": {
+                                                "styleName": "EsriRealisticTransportationStyle",
+                                                "name": "Tram"
+                                            }
+                                        },
+                                        "value": "Tram"
+                                    },
+                                    {
+                                        "label": "Boat",
+                                        "symbol": {
+                                            "type": "point-3d",
+                                            "symbolLayers": [
+                                                {
+                                                    "type": "object",
+                                                    "resource": {
+                                                        "href": "https://static.arcgis.com/arcgis/styleItems/RealisticTransportation/web/resource/Motorboat.json"
+                                                    },
+                                                    "height": 10
+                                                }
+                                            ],
+                                            "styleOrigin": {
+                                                "styleName": "EsriRealisticTransportationStyle",
+                                                "name": "Motorboat"
+                                            }
+                                        },
+                                        "value": "Boat"
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "id": "bridges",
+                            "title": "${layers.bridges}",
+                            "type": "AGS_SCENE",
+                            "legendEnabled": false,
+                            "url": "https://services2.arcgis.com/cFEFS0EWrhfDeVw9/arcgis/rest/services/STM____FR_Lyon__Textured_bridges/SceneServer/layers/0"
+                        },
+                        {
+                            "id": "buildings",
+                            "title": "${layers.buildings}",
+                            "type": "AGS_SCENE",
+                            "legendEnabled": false,
+                            "url": "https://services2.arcgis.com/cFEFS0EWrhfDeVw9/arcgis/rest/services/STM____FR_Lyon__Textured_buildings/SceneServer"
+                        },
+                        {
+                            "id": "orthoimagery",
+                            "title": "${layers.orthoimagery}",
+                            "type": "AGS_TILED",
+                            "legendEnabled": false,
+                            "url": "https://tiles.arcgis.com/tiles/cFEFS0EWrhfDeVw9/arcgis/rest/services/TMAP__102100__FR_Lyon__Orthoimage2012/MapServer"
+                        },
+                        {
+                            "id": "worldimagery",
+                            "title": "${layers.worldimagery}",
+                            "type": "AGS_TILED",
+                            "legendEnabled": false,
+                            "url": "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer"
+                        }
+                    ],
+                    "ground": [
+                        {
+                            "url": "https://tiles.arcgis.com/tiles/cFEFS0EWrhfDeVw9/arcgis/rest/services/ELEV____FR_Lyon__Elevation/ImageServer",
+                            "type": "ELEVATION"
+                        },
+                        {
+                            "url": "https://elevation3d.arcgis.com/arcgis/rest/services/WorldElevation3D/Terrain3D/ImageServer",
+                            "type": "ELEVATION"
+                        }
+                    ]
+                },
+                "view": {
+                    "viewmode": "3D",
+                    "camera": {
+                        "heading": 136.8701794643217,
+                        "tilt": 79.79644625047392,
+                        "position": {
+                            "x": 536508.4282291891,
+                            "y": 5742784.271064765,
+                            "z": 365.8990031592548,
+                            "spatialReference": {
+                                "wkid": 3857
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "search-ui": {
+            "Config": {
+                "actions": [
+                    "zoomto",
+                    "highlight",
+                    "openpopup"
+                ],
+                "maxResultsPerGroup": 5,
+                "showTotalResultsCount": false,
+                "searchDelay": 100,
+                "zoomto-point-scale": 100000
+            }
+        },
+        "toc": {
+            "Config": {
+                "showBasemaps": true,
+                "showLayerLegend": true
+            }
+        },
+        "toolrules": {
+            "ToolActiveStateManager": {
+                "activateOnStartToolIds": [
+                    "weatherVisualizationToogleTool"
+                ]
+            }
+        },
+        "toolset": {
+            "ToolsetManager": {
+                "toolsets": [
+                    {
+                        "id": "mapview_tools",
+                        "tools": [
+                            "weatherVisualizationToogleTool",
+                            "locateMeTool",
+                            "zoomInTool",
+                            "zoomOutTool",
+                            "compassTool",
+                            "restoreInitialViewTool",
+                            "viewmodeSwitcherTool"
+                        ],
+                        "registerWidget": {
+                            "widgetRole": "mapview_tools"
+                        },
+                        "container": "ignore",
+                        "windowType": "container",
+                        "cssClass": "muted",
+                        "tooltipPositions": [
+                            "before",
+                            "above",
+                            "below",
+                            "after"
+                        ]
+                    },
+                    {
+                        "id": "drawer_left",
+                        "title": "${tools.drawerLeft}",
+                        "cssClass": "ct-main-app-menu",
+                        "tools": [
+                            "selection-ui-tool",
+                            "sketchToggleTool",
+                            "measuring_tools",
+                            "printingToggleTool"
+                        ],
+                        "registerWidget": {
+                            "widgetRole": "drawer_button"
+                        },
+                        "container": "ignore",
+                        "windowType": "drawer_left",
+                        "tooltipPositions": [
+                            "after",
+                            "above",
+                            "below",
+                            "before"
+                        ]
+                    },
+                    {
+                        "id": "measuring_tools",
+                        "title": "${tools.measuring}",
+                        "iconClass": "icon-editor-table",
+                        "tools": [
+                            "distanceMeasurement2DToggleTool",
+                            "areaMeasurement2DToggleTool"
+                        ],
+                        "container": "ignore",
+                        "registerTool": true,
+                        "windowType": "menuitem",
+                        "tooltipPositions": [
+                            "after"
+                        ]
+                    }
+                ]
+            }
+        },
+        "dn_imprintprivacy": {
+            "ToolHandler": {
+                "imprintUrls": [
+                    {
+                        "locale": "de",
+                        "url": "https://www.conterra.de/impressum"
+                    },
+                    {
+                        "locale": "en",
+                        "url": "https://www.con-terra.com/imprint"
+                    }
+                ],
+                "privacyUrls": [
+                    {
+                        "locale": "de",
+                        "url": "https://www.conterra.de/datenschutzhinweise"
+                    },
+                    {
+                        "locale": "en",
+                        "url": "https://www.con-terra.com/privacy-statements"
+                    }
+                ],
+                "toolsetDefinition": {
+                    "id": "imprintprivacyToolset",
+                    "tools": [
+                        "imprintTool",
+                        "privacyStatementsTool"
+                    ],
+                    "registerWidget": {
+                        "widgetRole": "footer_right"
+                    },
+                    "container": "ignore",
+                    "windowType": "container",
+                    "cssClass": "showToolLabels"
+                }
+            }
+        }
+    }
+}
