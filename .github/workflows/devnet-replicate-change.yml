@@ -19,6 +19,7 @@ jobs:
       - name: Checkout target repository
         uses: actions/checkout@v4
         with:
+          token: ${{secrets.TECHNICAL_USER_RELEASE_TOKEN}}
           persist-credentials: false  # So we can use PAT for pushing branches later
 
       - name: Sync changes from template repository and create PR
