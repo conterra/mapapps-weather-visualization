@@ -1,33 +1,31 @@
-name: devnet-replicate-change
-
 on:
-  push:
-    branches:
-      - main  # Trigger on pushes to template repo main branch
-  workflow_dispatch:  # Also allow manual trigger
+  # Trigger manually or on schedule, you can add more triggers if you want
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
 
 env:
-  SOURCE_REPOSITORY: conterra/mapapps-devnet-blueprint  # Replace with your template repo full name
-  TARGET_REPOS: |
-    conterra/mapapps-weather-visualization
+  TEMPLATE_REPO: conterra/mapapps-devnet-blueprint # Replace with your template repo full name, e.g. 'my-org/template-repo'
+  TEMPLATE_BRANCH: main
 
 jobs:
   sync:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pull-requests: write
 
     steps:
-      - name: Checkout the template repository
+      - name: Checkout target repository
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false  # So we can use PAT for pushing branches later
 
-      - name: Sync to target repositories and create PRs
+      - name: Sync changes from template repository and create PR
         uses: AndreasAugustin/actions-template-sync@v2
         with:
-          github_token: ${{secrets.TECHNICAL_USER_RELEASE_TOKEN}}
-          source_repo_path: ${{ env.SOURCE_REPOSITORY }}
-          upstream_branch: main
-          pr_title: "[Template Sync] Update from template repo"
-          pr_commit_msg: "chore(template): sync changes from template repo"
-          pr_labels: "template_sync"
+          github_token: ${{secrets.TECHNICAL_USER_RELEASE_TOKEN}}  # PAT with write + PR permission on this repo
+          source_repo_path: ${{ env.TEMPLATE_REPO }}
+          upstream_branch: ${{ env.TEMPLATE_BRANCH }}
+          pr_title: '[Template Sync] Update from template repository'
+          pr_commit_msg: 'chore(template): synchronize changes from template repo'
+          pr_labels: 'template_sync'
