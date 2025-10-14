@@ -1,0 +1,93 @@
+/**
+ * Copyright (C) 2025 con terra GmbH (info@conterra.de)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *         http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+.weatherVisualizationWidget.dijitDialog {
+    height: 160px !important;
+    width: 300px !important;
+}
+
+.vue-base.weather-visualization-widget {
+    .v-stepper {
+        box-shadow: 0 0 0 0;
+
+        .v-stepper__header {
+            height: fit-content;
+            text-align: center;
+            box-shadow: 0 0 0 0;
+
+            .v-stepper__step {
+                place-content: center space-around;
+                cursor: pointer;
+                padding: 0.5em;
+                border: 1px solid #afafaf;
+                border-radius: 5px;
+                margin: 0.5px 1px 0 2px;
+                flex: auto;
+                height: 35px;
+
+                .v-stepper__label {
+                    display: inline-block !important;
+                }
+
+                .selected-icon {
+                    filter: invert(100%);
+                }
+            }
+
+            .v-stepper__step.is-selected {
+                background-color: #007ac2;
+                color: #fff;
+            }
+
+            .v-stepper__step__step {
+                display: none;
+            }
+        }
+
+        .v-stepper__content {
+            padding: 0 4px 0 4px;
+
+            .v-stepper__wrapper {
+
+                .v-input {
+                    margin-top: 4px;
+                    margin-bottom: 0;
+
+                    .v-input__prepend-outer {
+                        font-size: x-small;
+                    }
+
+                    .v-input__append-outer {
+                        font-size: x-small;
+                    }
+                }
+
+                .v-messages.theme--light {
+                    display: none;
+                }
+
+                p {
+                    font-size: 16px;
+                    text-align: center;
+                    margin: 4px 0;
+                }
+            }
+        }
+    }
+}
+.dijitDialogPaneContent{
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
+}
