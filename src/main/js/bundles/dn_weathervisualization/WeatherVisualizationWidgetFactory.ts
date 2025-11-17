@@ -17,7 +17,7 @@
 import Vue from "apprt-vue/Vue";
 import VueDijit from "apprt-vue/VueDijit";
 import WeatherVisualizationWidget from "./templates/WeatherVisualizationWidget.ts.vue";
-import WeatherViewModel from "esri/widgets/Weather/WeatherViewModel";
+import WeatherViewModel from "@arcgis/core/widgets/Weather/WeatherViewModel";
 import Binding from "apprt-binding/Binding";
 
 import type { InjectedReference } from "apprt-core/InjectedReference";
