@@ -1,5 +1,7 @@
 [![devnet-bundle-snapshot](https://github.com/conterra/mapapps-weather-visualization/actions/workflows/devnet-bundle-snapshot.yml/badge.svg)](https://github.com/conterra/mapapps-weather-visualization/actions/workflows/devnet-bundle-snapshot.yml)
-![Static Badge](https://img.shields.io/badge/tested_for_map.apps-4.19.1-%20?labelColor=%233E464F&color=%232FC050)
+![Static Badge](https://img.shields.io/badge/requires_map.apps-4.20.0-e5e5e5?labelColor=%233E464F&logoColor=%23e5e5e5)
+![Static Badge](https://img.shields.io/badge/tested_for_map.apps-4.20.0-%20?labelColor=%233E464F&color=%232FC050)
+
 # Weather Visualization
 The Weather Visualization Bundle offers a possibility to visualize differenct weather conditions in your 3D applications such as rain, snow and fog.
 
